@@ -1,0 +1,23 @@
+<?php
+namespace XModule\Traits;
+
+use \XModule\Shared\AjaxContent;
+use \XModule\Shared\Functions;
+
+trait WithAjaxContent
+{
+  use WithContent;
+
+  public function setContent($content)
+  {
+    if ($content instanceof AjaxContent) {
+      $this->content = $content;
+    } else if (is_array($content)) {
+      foreach ($content as $item) {
+        $this->addContent($item);
+      }
+    } else {
+      Functions::throwInvalidType($content, $this->getElementType(), 'content');
+    }
+  }
+}

@@ -1,0 +1,82 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Base\Element;
+use \XModule\Constants\ElementType;
+use \XModule\LinkListItem;
+use \XModule\Shared\AjaxContent;
+use \XModule\Shared\Functions;
+use \XModule\Traits\WithHeading;
+use \XModule\Traits\WithId;
+
+const DEFAULT_LIST_OPTIONS = [
+  'id' => null,
+  'grouped' => false,
+  'heading' => null,
+];
+
+class LinkList extends Element
+{
+  use WithId, WithHeading;
+  private $id;
+  private $grouped;
+  private $heading;
+  private $items;
+
+  public function __construct($items, array $options = DEFAULT_LIST_OPTIONS)
+  {
+    parent::__construct(ElementType::list);
+
+    $this->setItems($items);
+
+    self::initId($options);
+    self::initHeading($options);
+
+    if (isset($options['grouped'])) {
+      $this->setGrouped($options['grouped']);
+    }
+  }
+
+  public function setItems($items)
+  {
+    if ($items instanceof AjaxContent) {
+      $this->items = $items;
+    } else if (is_array($items)) {
+      foreach ($items as $item) {
+        $this->addItem($item);
+      }
+    } else {
+      Functions::throwInvalidType($items, $this->getElementType(), 'items');
+    }
+  }
+
+  public function addItem(LinkListItem $item)
+  {
+    if (!$this->items) {
+      $this->items = [];
+    }
+    array_push($this->items, $item);
+  }
+
+  public function setGrouped(bool $grouped)
+  {
+    $this->grouped = $grouped;
+  }
+
+  public function render()
+  {
+
+    $render = parent::render();
+    $render['items'] = Functions::safeRender($this->items);
+
+    self::renderId($render);
+    self::renderHeading($render);
+
+    if (isset($this->grouped)) {
+      $render['grouped'] = $this->grouped;
+    }
+
+    return $render;
+  }
+}

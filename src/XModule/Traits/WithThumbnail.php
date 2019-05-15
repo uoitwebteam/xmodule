@@ -1,0 +1,29 @@
+<?php
+namespace XModule\Traits;
+
+use \XModule\Shared\Functions;
+use \XModule\Shared\Thumbnail;
+
+trait WithThumbnail
+{
+  private $thumbnail;
+
+  public function initThumbnail(array $options)
+  {
+    if (isset($options['thumbnail'])) {
+      $this->setThumbnail($options['thumbnail']);
+    }
+  }
+
+  public function setThumbnail(Thumbnail $thumbnail)
+  {
+    $this->thumbnail = $thumbnail;
+  }
+
+  public function renderThumbnail(&$render)
+  {
+    if (isset($this->thumbnail)) {
+      $render['thumbnail'] = Functions::safeRender($this->thumbnail);
+    }
+  }
+}

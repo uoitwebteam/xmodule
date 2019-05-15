@@ -1,0 +1,11 @@
+<?php
+
+namespace XModule\Constants;
+
+use \XModule\Constants\Enum;
+
+abstract class ButtonType extends Enum
+{
+  const SUBMIT = 'submit';
+  const RESET = 'reset';
+}

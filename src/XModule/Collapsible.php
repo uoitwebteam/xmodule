@@ -1,0 +1,74 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Base\Element;
+use \XModule\Constants\DisclosureIcon;
+use \XModule\Constants\ElementType;
+use \XModule\Traits\WithContent;
+use \XModule\Traits\WithId;
+use \XModule\Traits\WithTitle;
+
+const DEFAULT_COLLAPSIBLE_OPTIONS = [
+  'id' => null,
+  'title' => null,
+  'collapsed' => false,
+  'disclosureIcon' => DisclosureIcon::PLUSMINUS,
+  'content' => [],
+];
+
+class Collapsible extends Element
+{
+  use WithId, WithTitle, WithContent;
+  private $collapsed;
+  private $disclosureIcon;
+
+  public function __construct(array $options = DEFAULT_COLLAPSIBLE_OPTIONS)
+  {
+    parent::__construct(ElementType::COLLAPSIBLE);
+
+    self::initId($options);
+    self::initTitle($options);
+    self::initContent($options);
+
+    if (isset($options['collapsed'])) {
+      $this->setCollapsed($options['collapsed']);
+    }
+    if (isset($options['disclosureIcon'])) {
+      $this->setDisclosureIcon($options['disclosureIcon']);
+    }
+  }
+
+  public function setTitle(string $title)
+  {
+    $this->title = $title;
+  }
+
+  public function setCollapsed(bool $collapsed)
+  {
+    $this->collapsed = $collapsed;
+  }
+
+  public function setDisclosureIcon(string $disclosureIcon)
+  {
+    $this->disclosureIcon = DisclosureIcon::validate($disclosureIcon, $this->getElementType());
+  }
+
+  public function render()
+  {
+    $render = parent::render();
+
+    self::renderId($render);
+    self::renderTitle($render);
+    self::renderContent($render);
+
+    if (isset($this->collapsed)) {
+      $render['collapsed'] = $this->collapsed;
+    }
+    if (isset($this->disclosureIcon)) {
+      $render['disclosureIcon'] = $this->disclosureIcon;
+    }
+
+    return $render;
+  }
+}

@@ -1,0 +1,12 @@
+<?php
+
+namespace XModule\Constants;
+
+use \XModule\Constants\Enum;
+
+abstract class Margins extends Enum
+{
+  const NONE = 'none';
+  const RESPONSIVE = 'responsive';
+  const MINIMAL = 'minimal';
+}

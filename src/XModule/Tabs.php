@@ -1,0 +1,78 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Base\Element;
+use \XModule\Constants\ElementType;
+use \XModule\Constants\TabType;
+use \XModule\Tab;
+use \XModule\Traits\WithId;
+
+const DEFAULT_TABS_OPTIONS = [
+  'id' => null,
+  'tabType' => TabType::FOLDER,
+  'forceAjaxOnLoad' => true,
+];
+
+class Tabs extends Element
+{
+  use WithId;
+  private $tabs;
+  private $tabType;
+  private $forceAjaxOnLoad;
+
+  public function __construct(array $tabs, array $options = DEFAULT_TABS_OPTIONS)
+  {
+    parent::__construct(ElementType::TABS);
+
+    self::initId($options);
+
+    if (isset($options['forceAjaxOnLoad'])) {
+      $this->setForceAjaxOnLoad($options['forceAjaxOnLoad']);
+    }
+  }
+
+  public function setTabs(array $tabs)
+  {
+    foreach ($tabs as $tab) {
+      $this->addTab($tab);
+    }
+  }
+
+  public function addTab(Tab $tab)
+  {
+    if (!$this->tabs) {
+      $this->tabs = [];
+    }
+    array_push($this->tabs, $tab);
+  }
+
+  public function setTabType(string $tabType)
+  {
+    $this->tabType = TabType::validate($tabType, $this->getElementType());
+  }
+
+  public function setForceAjaxOnLoad(bool $forceAjaxOnLoad)
+  {
+    $this->forceAjaxOnLoad = $forceAjaxOnLoad;
+  }
+
+  public function render()
+  {
+    $render = parent::render();
+
+    self::renderId($render);
+
+    if (isset($this->tabs)) {
+      $render['tabs'] = Functions::safeRender($this->tabs);
+    }
+    if (isset($this->tabType)) {
+      $render['tabType'] = $this->tabType;
+    }
+    if (isset($this->forceAjaxOnLoad)) {
+      $render['forceAjaxOnLoad'] = $this->height;
+    }
+
+    return $render;
+  }
+}

@@ -1,0 +1,124 @@
+<?php
+
+namespace XModule\Shared;
+
+use \XModule\Constants\BrowserType;
+use \XModule\Constants\Icon;
+use \XModule\Constants\LinkType;
+use \XModule\Constants\Target;
+
+const DEFAULT_LINK_OPTIONS = [
+  'browserType' => null,
+  'accessoryIcon' => null,
+  'targetNewWindow' => true,
+  'backActionTarget' => null,
+];
+
+class Link
+{
+  private $path;
+  private $type;
+  private $browserType;
+  private $accessoryIcon;
+  private $targetNewWindow;
+  private $backActionTarget;
+
+  public function __construct(string $path, string $type, $options = DEFAULT_LINK_OPTIONS)
+  {
+    $this->setPathAndType($path, $type);
+
+    if (isset($options['browserType'])) {
+      $this->setBrowserType($options['browserType']);
+    }
+    if (isset($options['accessoryIcon'])) {
+      $this->setAccessoryIcon($options['accessoryIcon']);
+    }
+    if (isset($options['targetNewWindow'])) {
+      $this->setTargetNewWindow($options['targetNewWindow']);
+    }
+    if (isset($options['backActionTarget'])) {
+      $this->setBackActionTarget($options['backActionTarget']);
+    }
+  }
+
+  public function setPath(string $path)
+  {
+    $this->path = $path;
+  }
+
+  public function setType(string $type)
+  {
+    $this->type = LinkType::validate($type, 'link', 'type');
+  }
+
+  public function setBrowserType(string $browserType)
+  {
+    $this->browserType = BrowserType::validate($browserType, 'link', 'browserType');
+  }
+
+  public function setAccessoryIcon(string $accessoryIcon)
+  {
+    $this->accessoryIcon = Icon::validate($accessoryIcon, 'link', 'accessoryIcon');
+  }
+
+  public function setTargetNewWindow(bool $targetNewWindow)
+  {
+    $this->targetNewWindow = $targetNewWindow;
+  }
+
+  public function setBackActionTarget(string $backActionTarget)
+  {
+    $this->backActionTarget = Target::validate($backActionTarget, 'link', 'backActionTarget');
+  }
+
+  public function setRelativeLink(string $path)
+  {
+    $this->setPathAndType($path, LinkType::RELATIVE_PATH);
+  }
+
+  public function setExternalLink(string $path)
+  {
+    $this->setPathAndType($path, LinkType::EXTERNAL);
+  }
+
+  public function setModuleLink(string $path)
+  {
+    $this->setPathAndType($path, LinkType::MODULE);
+  }
+
+  public function setXModuleLink(string $path)
+  {
+    $this->setPathAndType($path, LinkType::XMODULE);
+  }
+
+  public function setNativePluginLink(string $path)
+  {
+    $this->setPathAndType($path, LinkType::NATIVE_PLUGIN);
+  }
+
+  private function setPathAndType(string $path, string $type)
+  {
+    $this->setPath($path);
+    $this->setType($type);
+  }
+
+  public function render()
+  {
+    $render = [$this->type => $this->path];
+
+    if (isset($this->browserType)) {
+      $render['browserType'] = $this->browserType;
+    }
+    if (isset($this->accessoryIcon)) {
+      $render['accessoryIcon'] = $this->accessoryIcon;
+    }
+    if (isset($this->targetNewWindow)) {
+      $render['targetNewWindow'] = $this->targetNewWindow;
+    }
+    if (isset($this->backActionTarget)) {
+      $render['backActionTarget'] = $this->backActionTarget;
+    }
+
+    return $render;
+  }
+}
