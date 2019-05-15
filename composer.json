@@ -1,0 +1,19 @@
+{
+  "name": "ontariotechu/xmodule",
+  "description": "Utility classes for easily and consistently scaffolding API endpoints for Modo Labs XModule",
+  "type": "library",
+  "license": "MIT",
+  "authors": [{
+    "name": "Jackson Teather",
+    "email": "jackson.teather@uoit.ca"
+  }],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "XModule\\": "src/XModule"
+    }
+  }
+}
