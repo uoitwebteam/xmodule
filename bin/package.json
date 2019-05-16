@@ -1,0 +1,15 @@
+{
+  "name": "xmodule-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for scaffolding new XModule elements",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jackson Teather <jackson.teather@uoit.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.template": "^4.4.0",
+    "yargs": "^12.0.5"
+  }
+}
