@@ -57,7 +57,7 @@ $link = new Link('./', LinkType::RELATIVE_PATH);
 $button = new LinkButton('Click here', ['link' => $link]);
 
 /**
- * Attach your elements to eacho other and the XModule
+ * Attach your elements to each other and the XModule
  */
 $buttonContainer->addButton($button)
 $xmodule->addContent($buttonContainer);
