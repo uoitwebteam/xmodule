@@ -1,0 +1,63 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Shared\Functions;
+use \XModule\Shared\Thumbnail;
+use \XModule\Traits\WithDescription;
+use \XModule\Traits\WithLabel;
+use \XModule\Traits\WithLink;
+
+const DEFAULT_ITEM_OPTIONS = [
+  'label' => null,
+  'description' => null,
+  'link' => null,
+  'thumbnail' => null,
+];
+
+class LinkListItem
+{
+  use WithLabel, WithLink, WithDescription;
+  private $title;
+  private $description;
+  private $thumbnail;
+
+  public function __construct(string $title, array $options = DEFAULT_ITEM_OPTIONS)
+  {
+    $this->setTitle($title);
+
+    self::initLabel($options);
+    self::initLink($options);
+    self::initDescription($options);
+
+    if (isset($options['thumbnail'])) {
+      $this->setThumbnail($options['thumbnail']);
+    }
+  }
+
+  public function setTitle(string $title)
+  {
+    $this->title = $title;
+  }
+
+  public function setThumbnail(Thumbnail $thumbnail)
+  {
+    $this->thumbnail = $thumbnail;
+  }
+
+  public function render()
+  {
+    $render = ['title' => $this->title];
+
+    self::renderLabel($render);
+    self::renderLink($render);
+    self::renderDescription($render);
+
+    if (isset($this->thumbnail)) {
+      $render['thumbnail'] = Functions::safeRender($this->thumbnail);
+    }
+
+    return $render;
+  }
+}
+

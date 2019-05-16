@@ -1,0 +1,56 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Shared\Functions;
+use \XModule\TableCell;
+use \XModule\Traits\WithLink;
+
+const DEFAULT_TABLE_ROW_OPTIONS = [
+  'link' => null,
+  'cells' => [],
+];
+
+class TableRow
+{
+  use WithLink;
+  private $cells;
+
+  public function __construct(array $options = DEFAULT_TABLE_ROW_OPTIONS)
+  {
+    self::initLink($options);
+
+    if (isset($options['cells'])) {
+      $this->setCells($options['cells']);
+    }
+  }
+
+  public function setCells(array $cells)
+  {
+    foreach ($cells as $cell) {
+      $this->addCell($cell);
+    }
+  }
+
+  public function addCell(TableCell $cell)
+  {
+    if (!$this->cells) {
+      $this->cells = [];
+    }
+    array_push($this->cells, $cell);
+  }
+
+  public function render()
+  {
+    $render = [];
+
+    self::renderLink($render);
+
+    if (isset($this->cells)) {
+      $render['cells'] = Functions::safeRender($this->cells);
+    }
+
+    return $render;
+  }
+}
+

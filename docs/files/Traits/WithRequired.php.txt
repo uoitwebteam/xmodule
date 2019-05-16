@@ -1,0 +1,27 @@
+<?php
+namespace XModule\Traits;
+
+trait WithRequired
+{
+  private $required;
+
+  public function initRequired(array $options)
+  {
+    if (isset($options['required'])) {
+      $this->setRequired($options['required']);
+    }
+  }
+
+  public function setRequired(bool $required)
+  {
+    $this->required = $required;
+  }
+
+  public function renderRequired(&$render)
+  {
+    if (isset($this->required)) {
+      $render['required'] = $this->required;
+    }
+  }
+}
+

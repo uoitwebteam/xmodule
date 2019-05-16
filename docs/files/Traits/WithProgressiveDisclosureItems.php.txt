@@ -1,0 +1,70 @@
+<?php
+namespace XModule\Traits;
+
+use \XModule\Base\FormElement;
+use \XModule\Shared\AjaxContent;
+use \XModule\Shared\Functions;
+
+trait WithProgressiveDisclosureItems
+{
+  private $progressiveDisclosureItems;
+
+  public function initProgressiveDisclosureItems(array $options)
+  {
+    if (isset($options['progressiveDisclosureItems'])) {
+      $this->setProgressiveDisclosureItems($options['progressiveDisclosureItems']);
+    }
+  }
+
+  public function setProgressiveDisclosureItems(array $progressiveDisclosureItems)
+  {
+    foreach ($progressiveDisclosureItems as $optionValue => $items) {
+      $this->addProgressiveDisclosureItems($optionValue, $items);
+    }
+  }
+
+  public function addProgressiveDisclosureItems(string $optionValue, $items)
+  {
+    if (!$this->progressiveDisclosureItems) {
+      $this->progressiveDisclosureItems = [];
+    }
+    if (!isset($this->progressiveDisclosureItems[$optionValue])) {
+      $this->progressiveDisclosureItems[$optionValue] = [];
+    }
+    if ($items instanceof AjaxContent) {
+      $this->progressiveDisclosureItems[$optionValue] = $items;
+    } else if (is_array($items)) {
+      foreach ($items as $item) {
+        $this->addProgressiveDisclosureItem($optionValue, $item);
+      }
+    } else {
+      Functions::throwInvalidType($items, $this->getElementType(), 'progressive disclosure items');
+    }
+  }
+
+  public function addProgressiveDisclosureItem(string $optionValue, $item)
+  {
+    if (
+      is_subclass_of($item, FormElement::class)
+      || Functions::isOneOf($item, [
+        \XModule\ButtonContainer::class,
+        \XModule\Heading::class,
+        \XModule\Html::class,
+        \XModule\Image::class,
+        \XModule\Table::class,
+      ]
+      )) {
+      array_push($this->progressiveDisclosureItems[$optionValue], $item);
+    } else {
+      Functions::throwInvalidType($item, $this->getElementType(), 'progressive disclosure item');
+    }
+  }
+
+  public function renderProgressiveDisclosureItems(&$render)
+  {
+    if (isset($this->progressiveDisclosureItems)) {
+      $render['progressiveDisclosureItems'] = Functions::safeRender($this->progressiveDisclosureItems);
+    }
+  }
+}
+

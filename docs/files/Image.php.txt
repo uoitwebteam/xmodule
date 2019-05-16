@@ -1,0 +1,76 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Traits\WithId;
+
+const DEFAULT_IMAGE_OPTIONS = [
+  'id' => null,
+  'alt' => null,
+  'scaleToFull' => false,
+  'enableZoomControls' => false,
+];
+
+class Image
+{
+  use WithId;
+  private $url;
+  private $alt;
+  private $scaleToFull;
+  private $enableZoomControls;
+
+  public function __construct(string $url, array $options = DEFAULT_IMAGE_OPTIONS)
+  {
+    parent::__construct(ElementType::IMAGE);
+
+    self::initId($options);
+
+    $this->setUrl($options['url']);
+
+    if (isset($options['alt'])) {
+      $this->setAlt($options['alt']);
+    }
+    if (isset($options['scaleToFull'])) {
+      $this->setScaleToFull($options['scaleToFull']);
+    }
+    if (isset($options['enableZoomControls'])) {
+      $this->setEnableZoomControls($options['enableZoomControls']);
+    }
+  }
+
+  public function setAlt(string $alt)
+  {
+    $this->alt = $alt;
+  }
+
+  public function setScaleToFull(bool $scaleToFull)
+  {
+    $this->scaleToFull = $scaleToFull;
+  }
+
+  public function setEnableZoomControls(bool $enableZoomControls)
+  {
+    $this->enableZoomControls = $enableZoomControls;
+  }
+
+  public function render()
+  {
+    $render = parent::render();
+    $render['url'] = $this->url;
+
+    self::renderId($render);
+
+    if (isset($this->alt)) {
+      $render['alt'] = $this->alt;
+    }
+    if (isset($this->scaleToFull)) {
+      $render['scaleToFull'] = $this->scaleToFull;
+    }
+    if (isset($this->enableZoomControls)) {
+      $render['enableZoomControls'] = $this->enableZoomControls;
+    }
+
+    return $render;
+  }
+}
+

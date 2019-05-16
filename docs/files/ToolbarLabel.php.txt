@@ -1,0 +1,33 @@
+<?php
+
+namespace XModule;
+
+use \XModule\Base\Element;
+use \XModule\Constants\ElementType;
+use \XModule\Traits\WithLabel;
+
+const DEFAULT_TOOLBAR_LABEL_OPTIONS = [
+  'label' => null,
+];
+
+class ToolbarLabel extends Element
+{
+  use WithLabel;
+
+  public function __construct(array $options = DEFAULT_TOOLBAR_LABEL_OPTIONS)
+  {
+    parent::__construct(ElementType::TOOLBAR_LABEL);
+
+    self::initLabel($options);
+  }
+
+  public function render()
+  {
+    $render = parent::render();
+
+    self::renderLabel($render);
+
+    return $render;
+  }
+}
+

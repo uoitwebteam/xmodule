@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/XModule.html">\XModule</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">468</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1431463484"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1431463484" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-596519411"></a>
+                                <a href="../namespaces/XModule.html" style="margin-left: 30px; padding-left: 0">XModule</a>
+            </div>
+            <div id="namespace-596519411" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1663621555"></a>
+                                <a href="../namespaces/XModule.Base.html" style="margin-left: 30px; padding-left: 0">Base</a>
+            </div>
+            <div id="namespace-1663621555" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/XModule.Base.Element.html">Element</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Base.FormControl.html">FormControl</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Base.FormElement.html">FormElement</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Base.XModule.html">XModule</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-815074446"></a>
+                                <a href="../namespaces/XModule.Constants.html" style="margin-left: 30px; padding-left: 0">Constants</a>
+            </div>
+            <div id="namespace-815074446" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/XModule.Constants.AccessoryIconPosition.html">AccessoryIconPosition</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.ActionType.html">ActionType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.BrowserType.html">BrowserType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.ButtonType.html">ButtonType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.DisclosureIcon.html">DisclosureIcon</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Enum.html">Enum</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Height.html">Height</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.InputType.html">InputType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.LinkType.html">LinkType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Margins.html">Margins</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Position.html">Position</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.PostType.html">PostType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Size.html">Size</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Spacing.html">Spacing</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.TabType.html">TabType</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Constants.Target.html">Target</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1968472312"></a>
+                                <a href="../namespaces/XModule.Forms.html" style="margin-left: 30px; padding-left: 0">Forms</a>
+            </div>
+            <div id="namespace-1968472312" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/XModule.Forms.FormButton.html">FormButton</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Forms.Radio.html">Radio</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Forms.Select.html">Select</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Forms.Text.html">Text</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-654571530"></a>
+                                <a href="../namespaces/XModule.Shared.html" style="margin-left: 30px; padding-left: 0">Shared</a>
+            </div>
+            <div id="namespace-654571530" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/XModule.Shared.AjaxContent.html">AjaxContent</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Shared.Badge.html">Badge</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Shared.Functions.html">Functions</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Shared.Link.html">Link</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Shared.Thumbnail.html">Thumbnail</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-928097960"></a>
+                                <a href="../namespaces/XModule.Traits.html" style="margin-left: 30px; padding-left: 0">Traits</a>
+            </div>
+            <div id="namespace-928097960" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                            <li class="trait"><a href="../classes/XModule.Traits.WithAccessoryIconPosition.html">WithAccessoryIconPosition</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithAjaxContent.html">WithAjaxContent</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithContent.html">WithContent</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithDescription.html">WithDescription</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithHeading.html">WithHeading</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithId.html">WithId</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithLabel.html">WithLabel</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithLink.html">WithLink</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithProgressiveDisclosureItems.html">WithProgressiveDisclosureItems</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithRequired.html">WithRequired</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithSubtitle.html">WithSubtitle</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithThumbnail.html">WithThumbnail</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithTitle.html">WithTitle</a></li>
+                                                    <li class="trait"><a href="../classes/XModule.Traits.WithValue.html">WithValue</a></li>
+                                                                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/XModule.ButtonContainer.html">ButtonContainer</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Collapsible.html">Collapsible</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Container.html">Container</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Detail.html">Detail</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Form.html">Form</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Grid.html">Grid</a></li>
+                                                    <li class="class"><a href="../classes/XModule.GridItem.html">GridItem</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Heading.html">Heading</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Html.html">Html</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Image.html">Image</a></li>
+                                                    <li class="class"><a href="../classes/XModule.LinkButton.html">LinkButton</a></li>
+                                                    <li class="class"><a href="../classes/XModule.LinkListItem.html">LinkListItem</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Multicolumn.html">Multicolumn</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Portlet.html">Portlet</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Tab.html">Tab</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Table.html">Table</a></li>
+                                                    <li class="class"><a href="../classes/XModule.TableCell.html">TableCell</a></li>
+                                                    <li class="class"><a href="../classes/XModule.TableColumnOption.html">TableColumnOption</a></li>
+                                                    <li class="class"><a href="../classes/XModule.TableRow.html">TableRow</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Tabs.html">Tabs</a></li>
+                                                    <li class="class"><a href="../classes/XModule.Toolbar.html">Toolbar</a></li>
+                                                    <li class="class"><a href="../classes/XModule.ToolbarButton.html">ToolbarButton</a></li>
+                                                    <li class="class"><a href="../classes/XModule.ToolbarLabel.html">ToolbarLabel</a></li>
+                                                    <li class="class"><a href="../classes/XModule.ToolbarMenu.html">ToolbarMenu</a></li>
+                                                    <li class="class"><a href="../classes/XModule.ToolbarMenuItem.html">ToolbarMenuItem</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/XModule.Base.html">\XModule\Base</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\XModule\Base</small>XModule</h1>
+                    <p><em></em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/XModule.Traits.WithContent.html#method_initContent" class="">initContent()</a><br />
+                                                                    <a href="../classes/XModule.Traits.WithContent.html#method_setContent" class="">setContent()</a><br />
+                                                                    <a href="../classes/XModule.Traits.WithContent.html#method_addContent" class="">addContent()</a><br />
+                                                                    <a href="../classes/XModule.Traits.WithContent.html#method_renderContent" class="">renderContent()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method_setRegionContent" class="">setRegionContent()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method_addRegionContent" class="">addRegionContent()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method_setMetadata" class="">setMetadata()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method_addMetadata" class="">addMetadata()</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#method_render" class="">render()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/XModule.Base.XModule.html#constant_XMODULE_VERSION" class="">XMODULE_VERSION</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/XModule.Traits.WithContent.html#property_content" class="">$content</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#property_metadata" class="">$metadata</a><br />
+                                                                    <a href="../classes/XModule.Base.XModule.html#property_regionContent" class="">$regionContent</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Base.XModule.html"><div class="path-wrapper">Base/XModule.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\XModule\Base\XModule</div>
+                            </dd>
+
+                        
+                                                                                    <dt>Uses traits</dt>
+                                                        <dd>
+                                <a href="../classes/XModule.Traits.WithContent.html">                                    <div class="namespace-wrapper">\XModule\Traits\WithContent</div>
+                                </a>                            </dd>
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_XMODULE_VERSION" name="constant_XMODULE_VERSION" class="anchor"></a>
+            <article id="constant_XMODULE_VERSION" class="constant">
+                <h3 class="">XMODULE_VERSION</h3>
+                <pre class="signature">XMODULE_VERSION</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_content" name="property_content" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$content</h3>
+                <pre class="signature">$content : array&lt;mixed,\XModule\Base\Element&gt;</pre>
+                <p><em>The module&#039;s content</em></p>
+                
+
+                                <h4>Type</h4>
+                array&lt;mixed,<a href="../classes/XModule.Base.Element.html">\XModule\Base\Element</a>&gt;
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/XModule.Traits.WithContent.html"><div class="path-wrapper">\XModule\Traits\WithContent</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_metadata" name="property_metadata" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$metadata</h3>
+                <pre class="signature">$metadata : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_regionContent" name="property_regionContent" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$regionContent</h3>
+                <pre class="signature">$regionContent : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initContent" name="method_initContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">initContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initContent(array  <span class="argument">$options</span>) : void</pre>
+                <p><em>Initialize the module&#039;s content</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>The parent module's <code>$options</code> array</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/XModule.Traits.WithContent.html"><div class="path-wrapper">\XModule\Traits\WithContent</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setContent" name="method_setContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setContent(array  <span class="argument">$content</span>) : void</pre>
+                <p><em>Set the module&#039;s content</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$content </td>
+                                <td><p>An array of content to set</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/XModule.Traits.WithContent.html"><div class="path-wrapper">\XModule\Traits\WithContent</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addContent" name="method_addContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addContent(\XModule\Base\Element  <span class="argument">$item</span>) : void</pre>
+                <p><em>Add an element to the module&#039;s content</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/XModule.Base.Element.html">\XModule\Base\Element</a></td>
+                                <td>$item </td>
+                                <td><p>A content element to add</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/XModule.Traits.WithContent.html"><div class="path-wrapper">\XModule\Traits\WithContent</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_renderContent" name="method_renderContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">renderContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">renderContent(array  <span class="argument">$render</span>) : void</pre>
+                <p><em>Add the module&#039;s content to its render output</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$render </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/XModule.Traits.WithContent.html"><div class="path-wrapper">\XModule\Traits\WithContent</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\XModule\Base\int  <span class="argument">$version = self::XMODULE_VERSION</span>,   <span class="argument">$options = DEFAULT_XMODULE_OPTIONS</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\XModule\Base\int</td>
+                                <td>$version </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$options </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setRegionContent" name="method_setRegionContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setRegionContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setRegionContent(array  <span class="argument">$regionContents</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$regionContents </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addRegionContent" name="method_addRegionContent" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addRegionContent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addRegionContent(  <span class="argument">$regionContent</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$regionContent </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMetadata" name="method_setMetadata" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMetadata()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMetadata(  <span class="argument">$metadata</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$metadata </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addMetadata" name="method_addMetadata" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addMetadata()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addMetadata(\XModule\Base\string  <span class="argument">$key</span>,   <span class="argument">$value</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\XModule\Base\string</td>
+                                <td>$key </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$value </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_render" name="method_render" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">render()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">render() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">XModule.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Base/XModule.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/XModule.html">\XModule</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 16th, 2019 at 14:45.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

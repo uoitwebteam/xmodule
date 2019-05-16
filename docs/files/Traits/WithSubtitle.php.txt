@@ -1,0 +1,27 @@
+<?php
+namespace XModule\Traits;
+
+trait WithSubtitle
+{
+  private $subtitle;
+
+  public function initSubtitle(array $options)
+  {
+    if (isset($options['subtitle'])) {
+      $this->setSubtitle($options['subtitle']);
+    }
+  }
+
+  public function setSubtitle(string $subtitle)
+  {
+    $this->subtitle = $subtitle;
+  }
+
+  public function renderSubtitle(&$render)
+  {
+    if (isset($this->subtitle)) {
+      $render['subtitle'] = $this->subtitle;
+    }
+  }
+}
+

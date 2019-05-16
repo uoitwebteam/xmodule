@@ -1,0 +1,75 @@
+<?php
+
+namespace XModule\Shared;
+
+class Functions
+{
+  const TYPE_STRING = 'string';
+  const TYPE_NUMERIC = 'numeric';
+  const TYPE_ARRAY = 'array';
+  const TYPE_BOOL = 'bool';
+  const TYPE_OBJECT = 'object';
+  const TYPE_CALLABLE = 'callable';
+
+  public static function safeRender($content)
+  {
+    return is_array($content)
+    ? array_map([__CLASS__, 'safeRender'], $content)
+    : (method_exists($content, 'render')
+      ? $content->render()
+      : $content);
+  }
+
+  public static function isOneOf($target, array $classes = [])
+  {
+    $valid = false;
+    foreach ($classes as $toValidate) {
+      if ($target instanceof $toValidate) {
+        $valid = true;
+      }
+    }
+    return $valid;
+  }
+
+  public static function areAllOf(array $targets, $class)
+  {
+    return array_reduce($targets, function ($valid, $item) use ($class) {
+      return $valid && $item instanceof $class;
+    }, true);
+  }
+
+  public static function hasNamespace(string $namespace, $target)
+  {
+    return is_object($target) && (strpos(get_class($target), $namespace . '\\') === 0);
+  }
+
+  public static function throwInvalidType($value, string $elementType = 'element', string $className = 'item')
+  {
+    ob_start();
+    print_r($value);
+    $debug = ob_get_clean();
+    throw new \Error("Invalid XModule $elementType $className supplied: '$debug'");
+  }
+
+  public static function truncate($string, $length, $html = true)
+  {
+    if (strlen($string) > $length) {
+      if ($html) {
+        $original = str_replace('"', '\"', $string);
+      }
+      $string = substr($string, 0, $length);
+      if ($html) {
+        $string = '<span title="' . $original . '">' . $string . '&hellip;</span>';
+      } else {
+        $string .= '...';
+      }
+    }
+    return $string;
+  }
+
+  public static function stylizeMeridiam(string $date)
+  {
+    return str_replace(['am', 'pm'], ['a.m.', 'p.m.'], $date);
+  }
+}
+
