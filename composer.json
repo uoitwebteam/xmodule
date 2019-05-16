@@ -19,5 +19,9 @@
     "psr-4": {
       "XModule\\": "src/XModule"
     }
+  },
+  "support": {
+    "email": "webteam@uoit.ca",
+    "issues": "https://github.com/uoitwebteam/xmodule/issues"
   }
 }
