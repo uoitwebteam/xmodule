@@ -68,6 +68,31 @@ $xmodule->addContent($buttonContainer);
 echo json_encode($xmodule->render());
 ```
 
+## Result:
+
+```json
+{
+  "metadata": {
+    "version": "1"
+  },
+  "content": [
+    {
+      "elementType": "buttonContainer",
+      "id": "link_buttons",
+      "buttons": [
+        {
+          "elementType": "linkButton",
+          "title": "Click here",
+          "link": {
+            "relativePath": "./"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
 Documentation
 =============
 
