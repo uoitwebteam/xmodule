@@ -33,8 +33,6 @@ Usage
 
 Import the needed components into your server application:
 
-Element
-
 ```php
 use \XModule\Base\XModule;
 use \XModule\Shared\Link;
@@ -43,19 +41,30 @@ use \XModule\ButtonContainer;
 use \XModule\LinkButton;
 ```
 
-Use the components to build XModule structures
+Use the components to build XModule structures:
 
 ```php
-// create a new XModule
+/**
+ * Create a new XModule
+ */
 $xmodule = new XModule();
-// create XModule elements
+
+/**
+ * Create XModule elements
+ */
 $buttonContainer = new ButtonContainer(['id' => 'link_buttons']);
 $link = new Link('./', LinkType::RELATIVE_PATH);
 $button = new LinkButton('Click here', ['link' => $link]);
-// attach your elements to eacho other and the XModule
+
+/**
+ * Attach your elements to eacho other and the XModule
+ */
 $buttonContainer->addButton($button)
 $xmodule->addContent($buttonContainer);
-// render the output
+
+/**
+ * Render the output
+ */
 echo json_encode($xmodule->render());
 ```
 

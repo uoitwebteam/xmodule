@@ -1,11 +1,15 @@
 {
   "name": "ontariotechu/xmodule",
   "description": "Utility classes for easily and consistently scaffolding API endpoints for Modo Labs XModule",
+  "homepage": "https://github.com/uoitwebteam/xmodule",
   "type": "library",
   "license": "MIT",
   "authors": [{
     "name": "Jackson Teather",
     "email": "jackson.teather@uoit.ca"
+  }, {
+    "name": "Ontario Tech web team",
+    "email": "webteam@uoit.ca"
   }],
   "minimum-stability": "dev",
   "require": {
