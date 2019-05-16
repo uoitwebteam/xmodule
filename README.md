@@ -13,7 +13,7 @@ After being built, scaffolded XModules can have their contents output in fully c
 Requirements
 ============
 
-* PHP >= 7.2.0
+* PHP >= 7.0.0
 
 Installation
 ============
