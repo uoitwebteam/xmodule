@@ -23,5 +23,9 @@
   "support": {
     "email": "webteam@uoit.ca",
     "issues": "https://github.com/uoitwebteam/xmodule/issues"
+  },
+  "scripts": {
+    "docs": "php -S 0.0.0.0:8080 -t docs",
+    "build-docs": "php phpdoc.phar run -d ./src -t ./docs"
   }
 }

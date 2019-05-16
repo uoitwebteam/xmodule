@@ -68,6 +68,19 @@ $xmodule->addContent($buttonContainer);
 echo json_encode($xmodule->render());
 ```
 
+Documentation
+=============
+
+...is still pending, but in the meantime there are some very basic auto-generated docs that can be found in the [`/docs`](/docs) folder of this repository. Documentation can be regenerated on viewed using the included Composer scripts:
+
+```sh
+# regenerate
+$ composer run-script build-docs
+
+# view docs (http://0.0.0.0:8080)
+$ composer run-script docs
+```
+
 Credits
 =======
 
