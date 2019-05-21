@@ -7,7 +7,7 @@ use \XModule\Constants\Enum;
 abstract class ElementType extends Enum
 {
   const TABS = 'tabs';
-  const list = 'list';
+  const LIST = 'list';
   const DETAIL = 'detail';
   const TOOLBAR = 'toolbar';
   const TOOLBAR_BUTTON = 'toolbarButton';

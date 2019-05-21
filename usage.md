@@ -142,7 +142,7 @@ $linkbutton = new LinkButton([
 
 ### Shared
 
-A small handful of XModule elements are usable as pieces within a number of different elements – these live under the `\XModule\Shared` namespace. For instance, the `Link` element contains properties that are shared by all links, whether they are attached to a `LinkListItem`, a `LinkButton`, etc; see the page on [XModule Links](https://xmodule-docs.modolabs.net/xmodule/links/) for more info.
+A small handful of XModule elements are usable as pieces within a number of different elements – these live under the `\XModule\Shared` namespace. For instance, the `Link` element contains properties that are shared by all links, whether they are attached to a `LinkListItem`, a `LinkButton`, etc...
 
 Currently supported shared elements include:
 
@@ -155,7 +155,7 @@ An `\XModule\Shared\Functions` class is also included in this namespace; these a
 
 #### `Link`
 
-The `Link` class has two required properties that must be supplied on creation, its path and type:
+The `Link` class is a generic element for handling all XModule link behaviour; see the page on [XModule Links](https://xmodule-docs.modolabs.net/xmodule/links/) for more info. It has two required properties that must be supplied on creation, its path and type:
 
 ```php
 use \XModule\Link;
@@ -164,9 +164,21 @@ use \XModule\Constants\LinkType;
 $link = new Link("./details", LinkType::RELATIVE_PATH);
 ```
 
+As demonstrated above, the link element's type must use one of the `LinkType` constants (in this case, `RELATIVE_PATH`).
+
+Available link types include:
+
+* RELATIVE_PATH
+* EXTERNAL
+* MODULE
+* XMODULE
+* NATIVE_PLUGIN
+
 #### `AjaxContent`
 
-Some XModule elements, like the list and container element, accept _Ajax_ content in place of their regular static content; see the page on [Ajax Content](https://xmodule-docs.modolabs.net/xmodule/ajax/) for more details. In these cases, it is necessary to provide an `AjaxContent` instance for the element's content:
+Some XModule elements, like the list and container element, accept _Ajax_ content in place of their regular static content; see the page on [Ajax Content](https://xmodule-docs.modolabs.net/xmodule/ajax/) for more details. In these cases, it is necessary to provide an `AjaxContent` instance for the element's content.
+
+The `AjaxContent` class requires a path argument, which points to the relative URL that will supply the "inner" content:
 
 ```php
 use \XModule\Container;
@@ -174,5 +186,62 @@ use \XModule\Shared\AjaxContent;
 
 $container = new Container();
 $ajaxcontent = new AjaxContent("./details?region_content=true");
+
 $container->setContent($ajaxcontent);
+```
+
+When using Ajax content instead of regular content, remember to use the `setContent` method (like above) and just supply a single `AjaxContent` item instead of an array of elements like you'd normally supply. This is because the array of items will be supplied as the `regionContent` of the XModule that provides the inner Ajax content:
+
+```php
+// ./details?region_content=true
+
+use \XModule\Base\XModule;
+use \XModule\Heading;
+use \XModule\Image;
+
+$xmodule = new XModule();
+$heading = new Heading("Cat travels via Ajax");
+$image = new Image("https://placekitten.com/200/300");
+
+$xmodule->setRegionContent([$heading, $image]);
+```
+
+In the above examples, the rendered output (after a call to `json_encode($xmodule->render())`) would look like the following:
+
+__Example 1__
+
+```json
+{
+  "metadata": {
+    "version": "1"
+  },
+  "content": [
+    {
+      "elementType": "container",
+      "content": {
+        "ajaxRelativePath": "./details?region_content=true"
+      }
+    }
+  ]
+}
+```
+
+__Example 2__
+
+```json
+{
+  "metadata": {
+    "version": "1"
+  },
+  "regionContent": [
+    {
+      "elementType": "heading",
+      "title": "Cat travels via Ajax"
+    },
+    {
+      "elementType": "image",
+      "url": "https://placekitten.com/200/300"
+    }
+  ]
+}
 ```

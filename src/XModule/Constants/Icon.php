@@ -23,7 +23,7 @@ abstract class Icon extends Enum
   const DOWNLOAD = 'download';
   const UPLOAD = 'upload';
   const CAMERA = 'camera';
-  const print  = 'print';
+  const PRINT  = 'print';
   const FAVORITE = 'favorite';
   const BOOKMARK = 'bookmark';
   const SHARE = 'share';
