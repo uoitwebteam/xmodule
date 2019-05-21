@@ -138,6 +138,27 @@ $linkbutton = new LinkButton([
 // !!! ERROR: invalid actionType "dstructiveWithTypo" provided for link button
 ```
 
+Supported constants include:
+
+* AccessoryIconPosition
+* ActionType
+* BrowserType
+* ButtonType
+* DisclosureIcon
+* ElementType
+* Enum
+* Height
+* Icon
+* InputType
+* LinkType
+* Margins
+* Position
+* PostType
+* Size
+* Spacing
+* TabType
+* Target
+
 ## Special elements
 
 ### Shared
