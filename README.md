@@ -96,7 +96,9 @@ echo json_encode($xmodule->render());
 Documentation
 =============
 
-...is still pending, but in the meantime there are some very basic auto-generated docs that can be found in the [`/docs`](/docs) folder of this repository. Documentation can be regenerated or viewed using the included Composer scripts:
+__General usage how-tos can be found in the [wiki of this repository](../../wiki). The pages of the wiki are also presented in a single document inside [usage.md](/usage.md) for quick access.__
+
+_Full class documentation is still pending_, but in the meantime there are some very basic auto-generated docs that can be found in the [`/docs`](/docs) folder of this repository. Documentation can be regenerated or viewed using the included Composer scripts:
 
 ```sh
 # regenerate
@@ -105,8 +107,6 @@ $ composer run-script build-docs
 # view docs (http://0.0.0.0:8080)
 $ composer run-script docs
 ```
-
-__General usage how-tos can be found in [usage.md](/usage.md).__
 
 Credits
 =======
