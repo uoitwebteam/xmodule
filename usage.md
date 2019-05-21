@@ -266,3 +266,34 @@ __Example 2__
   ]
 }
 ```
+
+### Forms
+
+XModule form elements have their own namespace, `\XModule\Forms` – apart for the `Form` element itself, which lives with the rest of the `\XModule` namespace elements. All form elements must go inside a parent `Form` element.
+
+All form elements inherit from the `FormElement` class, which gives them an input type and label. Additionally, some inherit from the `FormControl` class, which gives the input some additional properties, like a `name` attribute.
+
+See the page on [XModule forms](https://xmodule-docs.modolabs.net/forms/) for more details.
+
+#### Form
+
+The `Form` element itself serves as a container for all form elements, and additionally, a [few other non-form elements](https://xmodule-docs.modolabs.net/appendix/supported_child_elements/) as well. Its only required property is the URL to which the form submits, i.e. the form's `action` attribute.
+
+It is similar in function to the `Container` element, in that it holds an array of items (in this case, form elements) as its content under an `items` property:
+
+```php
+use \XModule\Form;
+use \XModule\Forms\Text;
+
+$form = new Form("./submit");
+$firstname = new Text("First name", "name_first");
+$lastname = new Text("Last name", "name_last");
+
+$form->setItems([$firstname, $lastname]);
+
+// or one at a time...
+$firstname = new Text("First name", "name_first");
+$form->addItem($firstname);
+$lastname = new Text("Last name", "name_last");
+$form->addItem($lastname);
+```
