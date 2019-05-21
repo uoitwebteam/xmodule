@@ -51,7 +51,7 @@ $heading = new Heading("Songs About Cats", [
 ]);
 ```
 
-Optional properties like the `id` and `description` above can either be set immediately on creation, or at a later time using getter/setters (as in the first example):
+All properties, required or optional, can either be set immediately on creation or at a later time using getter/setters (as in the first example):
 
 ```php
 $heading->setId("cat_songs");
