@@ -50,25 +50,4 @@ class Functions
     $debug = ob_get_clean();
     throw new \Error("Invalid XModule $elementType $className supplied: '$debug'");
   }
-
-  public static function truncate($string, $length, $html = true)
-  {
-    if (strlen($string) > $length) {
-      if ($html) {
-        $original = str_replace('"', '\"', $string);
-      }
-      $string = substr($string, 0, $length);
-      if ($html) {
-        $string = '<span title="' . $original . '">' . $string . '&hellip;</span>';
-      } else {
-        $string .= '...';
-      }
-    }
-    return $string;
-  }
-
-  public static function stylizeMeridiam(string $date)
-  {
-    return str_replace(['am', 'pm'], ['a.m.', 'p.m.'], $date);
-  }
 }

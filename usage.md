@@ -144,6 +144,15 @@ $linkbutton = new LinkButton([
 
 A small handful of XModule elements are usable as pieces within a number of different elements – these live under the `\XModule\Shared` namespace. For instance, the `Link` element contains properties that are shared by all links, whether they are attached to a `LinkListItem`, a `LinkButton`, etc; see the page on [XModule Links](https://xmodule-docs.modolabs.net/xmodule/links/) for more info.
 
+Currently supported shared elements include:
+
+* `AjaxContent`
+* `Badge`
+* `Link`
+* `Thumbnail`
+
+An `\XModule\Shared\Functions` class is also included in this namespace; these are internal functions and are unlikely to be needed in a user-facing application.
+
 #### `Link`
 
 The `Link` class has two required properties that must be supplied on creation, its path and type:
