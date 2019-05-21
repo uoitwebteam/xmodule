@@ -106,6 +106,8 @@ $ composer run-script build-docs
 $ composer run-script docs
 ```
 
+__General usage how-tos can be found in [usage.md](/usage.md).__
+
 Credits
 =======
 
