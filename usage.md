@@ -297,3 +297,25 @@ $form->addItem($firstname);
 $lastname = new Text("Last name", "name_last");
 $form->addItem($lastname);
 ```
+
+#### Foreground POST
+
+The [XModule page for foreground POST](https://xmodule-docs.modolabs.net/forms/post_requirements_foreground/) outlines some specifications for how this type of interaction should be handled. Specifically, it describes a three-stage workflow in which a form is submitted, a response containing _a redirect URL_ is returned, and finally the redirect URL returns the result of the form submission.
+
+To carry this out using this library's classes, you'll need to set the root XModule instance's `metadata` to contain the `redirectLink` for the response to a form submission; the link itself is an XModule `Link` element:
+
+```php
+use \XModule\Base\XModule;
+use \XModule\Shared\Link;
+use \XModule\Constants\LinkType;
+
+$xmodule = new XModule();
+$redirect = new Link("./submit?token=_SSKdg93fsdmv9Dsffa", LinkType::RELATIVE_PATH);
+
+$xmodule->setMetadata(["redirectLink" => $redirect]);
+
+// or just add the one property...
+$xmodule->addMetadata("redirectLink", $redirect);
+```
+
+The redirect URL can simply return another `new XModule()` with normal content, which will be displayed as the final result of the form.
