@@ -350,14 +350,118 @@ Take for example the following JSON array of 'person' objects:
 
 We can create an XModule `Table` element from this array by using PHP's `array_map()` function to iteratively transform it. The properties of each of object become the row's `cells`, each object becomes one of the `rows`, and finally the rows are added to a table with the appropriate headings.
 
-Below is an example that demonstrates how such as structure might be achieved, as well as use of the shared `Link` element in order to make the table rows linkable:
+Below is an example that demonstrates how such as structure might be achieved, as well as use of the shared `Link` element in order to make the table rows linkable.
+
+First we import the needed elements – the base, the table elements, and link element/constant:
 
 ```php
+// base
 use \XModule\Base\XModule;
+// table
 use \XModule\Table;
 use \XModule\TableCell;
 use \XModule\TableRow;
 use \XModule\TableColumnOption;
+// link
+use \XModule\Shared\Link;
+use \XModule\Constants\LinkType;
+```
+
+The first thing we'll need to create is a new `XModule` container for our table:
+
+```php
+// create a new xmodule
+$xmodule = new XModule();
+```
+
+Assuming the raw JSON data is already stored in a variable called `$json`, we'll need to decode it into a PHP-readable format – in this case, an associative array:
+
+```php
+// decode the json data
+$data = json_decode($json, true);
+```
+
+Next, the array of person objects stored in the `$data` variable will need to be transformed into an array of `TableRow` instances. We can use `array_map()` to walk along the array and return something new for each array item:
+
+```php
+// map array values (person objects) to table rows
+$rows = array_map(function ($person) {
+  // ...
+}, $data)
+```
+
+Inside the `array_map()` callback function, we can extract the needed parts from each object and assign them to a `Link` and `TableCell`s:
+
+```php
+// ...array_map(function ($person) {
+  $id = $person["id"];
+  // create new link from person id
+  $link = new Link("./person/$id", LinkType::RELATIVE_PATH);
+  // assign info to table cells
+  $cells = [
+    new \XModule\TableCell(["title" => $id]),
+    new \XModule\TableCell(["title" => $person["name"]]),
+    new \XModule\TableCell(["title" => $person["rsvp"] ?: "Yes" : "No"])
+  ];
+// ...}, $data)
+```
+
+Finally, we can assign the link and cells to a new `TableRow` instance and return it as the replacement array item:
+
+```php
+// ...array_map(function ($person) {
+  // assign cells to table rows + row link
+  $row = new \XModule\TableRow([
+    "cells" => $cells,
+    "link" => $link
+  ]);
+  // !!! important – return the replacement array item
+  return $row;
+// ...}, $data)
+```
+
+To display the rows, we'll need a `Table` element to hold them. This is where we can use `TableColumnOption` elements to define the table's header row, as well as optionally give the table some heading text:
+
+```php
+// give table columns and assign rows + heading text
+$table = new \XModule\Table([
+  "heading" => "Science Party guest list",
+  "columnOptions" => [
+    new \XModule\TableColumnOption(["header" => "ID"]),
+    new \XModule\TableColumnOption(["header" => "Name"]),
+    new \XModule\TableColumnOption(["header" => "Has RSVP?"])
+  ],
+  "rows" => $rows
+]);
+```
+
+Last but not least, the table must be added to the `XModule` instance:
+
+```php
+// add table to xmodule
+$xmodule->addContent($table);
+// or...
+// $xmodule->setContent([ $table ]);
+```
+
+To return a final JSON-encoded version of your XModule, be sure to call the `XModule` element's `render()` method to flatten its properties:
+
+```php
+// render output
+echo json_encode($xmodule->render());
+```
+
+## Full example
+
+```php
+// base
+use \XModule\Base\XModule;
+// table
+use \XModule\Table;
+use \XModule\TableCell;
+use \XModule\TableRow;
+use \XModule\TableColumnOption;
+// link
 use \XModule\Shared\Link;
 use \XModule\Constants\LinkType;
 
@@ -370,20 +474,24 @@ $data = json_decode($json, true);
 // map array values (person objects) to table rows
 $rows = array_map(function ($person) {
   $id = $person["id"];
+  // create new link from person id
   $link = new Link("./person/$id", LinkType::RELATIVE_PATH);
+  // assign info to table cells
   $cells = [
     new \XModule\TableCell(["title" => $id]),
     new \XModule\TableCell(["title" => $person["name"]]),
     new \XModule\TableCell(["title" => $person["rsvp"] ?: "Yes" : "No"])
   ];
+  // assign cells to table rows + row link
   $row = new \XModule\TableRow([
     "cells" => $cells,
     "link" => $link
   ]);
+  // !!! important – return the replacement array item
   return $row;
-}, $data)
+}, $data);
 
-// give table columns and assign rows
+// give table columns and assign rows + heading text
 $table = new \XModule\Table([
   "heading" => "Science Party guest list",
   "columnOptions" => [
@@ -396,6 +504,8 @@ $table = new \XModule\Table([
 
 // add table to xmodule
 $xmodule->addContent($table);
+// or...
+// $xmodule->setContent([ $table ]);
 
 // render output
 echo json_encode($xmodule->render());
@@ -422,6 +532,9 @@ __Result:__
       }
     ],
     "rows": [{
+        "link": {
+          "relativePath": "./person/1"
+        },
         "cells": [{
             "title": "1"
           },
@@ -434,6 +547,9 @@ __Result:__
         ]
       },
       {
+        "link": {
+          "relativePath": "./person/2"
+        },
         "cells": [{
             "title": "2"
           },
@@ -446,6 +562,9 @@ __Result:__
         ]
       },
       {
+        "link": {
+          "relativePath": "./person/2"
+        },
         "cells": [{
             "title": "2"
           },
