@@ -319,3 +319,137 @@ $xmodule->addMetadata("redirectLink", $redirect);
 ```
 
 The redirect URL can simply return another `new XModule()` with normal content, which will be displayed as the final result of the form.
+
+## Complete examples
+
+### Building a table
+
+Rendering a table is a common layout task. Often we'll need to operate on a large set of data – usually an array – to create a cascade of rows with cells.
+
+Take for example the following JSON array of 'person' objects:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Jane Goodall",
+    "rsvp": false
+  },
+  {
+    "id": 2,
+    "name": "Ada Lovelace",
+    "rsvp": true
+  },
+  {
+    "id": 2,
+    "name": "Marie Curie",
+    "rsvp": true
+  }
+]
+```
+
+We can create an XModule `Table` element from this array by using PHP's `array_map()` function to iteratively transform it. The properties of each of object become the row's `cells`, each object becomes one of the `rows`, and finally the rows are added to a table with the appropriate headings.
+
+Below is an example that demonstrates how such as structure might be achieved, as well as use of the shared `Link` element in order to make the table rows linkable:
+
+```php
+use \XModule\Base\XModule;
+use \XModule\Table;
+use \XModule\TableCell;
+use \XModule\TableRow;
+use \XModule\TableColumnOption;
+
+// create a new xmodule
+$xmodule = new XModule();
+
+// decode the json data
+$data = json_decode($json, true);
+
+// map array values (person objects) to table rows
+$rows = array_map(function ($person) {
+  $cells = [
+    new \XModule\TableCell(["title" => $person["id"]]),
+    new \XModule\TableCell(["title" => $person["name"]]),
+    new \XModule\TableCell(["title" => $person["rsvp"] ?: "Yes" : "No"])
+  ];
+  $row = new \XModule\TableRow(["cells" => $cells]);
+}, $data)
+
+// give table columns and assign rows
+$table = new \XModule\Table([
+  "heading" => "Science Party guest list",
+  "columnOptions" => [
+    new \XModule\TableColumnOption(["header" => "ID"]),
+    new \XModule\TableColumnOption(["header" => "Name"]),
+    new \XModule\TableColumnOption(["header" => "Has RSVP?"])
+  ],
+  "rows" => $rows
+]);
+
+// add table to xmodule
+$xmodule->addContent($table);
+
+// render output
+echo json_encode($xmodule->render());
+```
+
+__Result:__
+
+```json
+{
+  "metadata": {
+    "version": "1"
+  },
+  "content": [{
+    "elementType": "table",
+    "heading": "Science Party guest list",
+    "columnOptions": [{
+        "header": "ID"
+      },
+      {
+        "header": "Name"
+      },
+      {
+        "header": "Has RSVP?"
+      }
+    ],
+    "rows": [{
+        "cells": [{
+            "title": "1"
+          },
+          {
+            "title": "Jane Goodall"
+          },
+          {
+            "title": "No"
+          }
+        ]
+      },
+      {
+        "cells": [{
+            "title": "2"
+          },
+          {
+            "title": "Ada Lovelace"
+          },
+          {
+            "title": "Yes"
+          }
+        ]
+      },
+      {
+        "cells": [{
+            "title": "2"
+          },
+          {
+            "title": "Marie Curie"
+          },
+          {
+            "title": "Yes"
+          }
+        ]
+      }
+    ]
+  }]
+}
+```
