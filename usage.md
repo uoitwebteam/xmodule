@@ -352,6 +352,8 @@ We can create an XModule `Table` element from this array by using PHP's `array_m
 
 Below is an example that demonstrates how such as structure might be achieved, as well as use of the shared `Link` element in order to make the table rows linkable.
 
+## Imports
+
 First we import the needed elements – the base, the table elements, and link elements:
 
 ```php
@@ -369,6 +371,8 @@ use \XModule\Shared\Link;
 use \XModule\Constants\LinkType;
 ```
 
+## Initialization and data parsing
+
 The first thing we'll need to create is a new `XModule` container for our table:
 
 ```php
@@ -380,6 +384,8 @@ Assuming the raw JSON data is already stored in a variable called `$json`, we'll
 ```php
 $data = json_decode($json, true);
 ```
+
+## Transform array into table rows with cells
 
 Next, the array of person objects stored in the `$data` variable will need to be transformed into an array of `TableRow` instances. We can use `array_map()` to walk along the array and return something new for each array item:
 
@@ -416,6 +422,8 @@ Finally, we can assign the link and cells to a new `TableRow` instance and retur
 // ...}
 ```
 
+## Add rows to table with column headings
+
 To display the rows, we'll need a `Table` element to hold them. This is where we can use `TableColumnOption` elements to define the table's header row, as well as optionally give the table some heading text:
 
 ```php
@@ -429,6 +437,8 @@ $table = new \XModule\Table([
   "rows" => $rows
 ]);
 ```
+
+## Add table to module and render
 
 Last but not least, the table must be added to the `XModule` instance:
 
@@ -444,7 +454,7 @@ To return a final JSON-encoded version of your XModule, be sure to call the `XMo
 echo json_encode($xmodule->render());
 ```
 
-## Full example
+### Full example
 
 ```php
 /**
@@ -504,7 +514,7 @@ $xmodule->addContent($table);
 echo json_encode($xmodule->render());
 ```
 
-__Result:__
+### Result:
 
 ```json
 {
