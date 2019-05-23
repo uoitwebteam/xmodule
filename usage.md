@@ -358,6 +358,8 @@ use \XModule\Table;
 use \XModule\TableCell;
 use \XModule\TableRow;
 use \XModule\TableColumnOption;
+use \XModule\Shared\Link;
+use \XModule\Constants\LinkType;
 
 // create a new xmodule
 $xmodule = new XModule();
@@ -367,12 +369,18 @@ $data = json_decode($json, true);
 
 // map array values (person objects) to table rows
 $rows = array_map(function ($person) {
+  $id = $person["id"];
+  $link = new Link("./person/$id", LinkType::RELATIVE_PATH);
   $cells = [
-    new \XModule\TableCell(["title" => $person["id"]]),
+    new \XModule\TableCell(["title" => $id]),
     new \XModule\TableCell(["title" => $person["name"]]),
     new \XModule\TableCell(["title" => $person["rsvp"] ?: "Yes" : "No"])
   ];
-  $row = new \XModule\TableRow(["cells" => $cells]);
+  $row = new \XModule\TableRow([
+    "cells" => $cells,
+    "link" => $link
+  ]);
+  return $row;
 }, $data)
 
 // give table columns and assign rows
