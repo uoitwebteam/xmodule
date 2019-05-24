@@ -5,6 +5,7 @@ namespace XModule\Forms;
 use \XModule\Base\FormControl;
 use \XModule\Constants\InputType;
 use \XModule\Traits\WithDescription;
+use \XModule\Traits\WithPlaceholder;
 use \XModule\Traits\WithRequired;
 use \XModule\Traits\WithValue;
 
@@ -17,8 +18,7 @@ const DEFAULT_TEXT_OPTIONS = [
 
 class Text extends FormControl
 {
-  use WithDescription, WithRequired, WithValue;
-  private $placeholder;
+  use WithDescription, WithRequired, WithValue, WithPlaceholder;
 
   public function __construct(string $label, string $name, array $options = DEFAULT_TEXT_OPTIONS)
   {
@@ -27,15 +27,7 @@ class Text extends FormControl
     self::initDescription($options);
     self::initRequired($options);
     self::initValue($options);
-
-    if (isset($options['placeholder'])) {
-      $this->setPlaceholder($options['placeholder']);
-    }
-  }
-
-  public function setPlaceholder(string $placeholder)
-  {
-    $this->placeholder = $placeholder;
+    self::initPlaceholder($options);
   }
 
   public function render()
@@ -45,10 +37,7 @@ class Text extends FormControl
     self::renderDescription($render);
     self::renderRequired($render);
     self::renderValue($render);
-
-    if (isset($this->placeholder)) {
-      $render['placeholder'] = $this->placeholder;
-    }
+    self::renderPlaceholder($render);
 
     return $render;
   }
