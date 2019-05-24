@@ -74,6 +74,7 @@ class Radio extends FormControl
   public function render()
   {
     $render = parent::render();
+
     self::renderDescription($render);
     self::renderProgressiveDisclosureItems($render);
     self::renderRequired($render);

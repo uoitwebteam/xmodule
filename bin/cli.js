@@ -55,7 +55,7 @@ const createXModule = (id, type = TYPE_ELEMENT, path = XMODULE_PATH) => {
 
 const createEnum = id => {
   const classname = uppercaseFirst(id);
-  renderAndWrite(classname, TYPE_ENUM, CONSTANTS_PATH, null, false);
+  renderAndWrite(classname, TYPE_ENUM, CONSTANTS_PATH, {}, false);
 }
 
 const createTrait = name => {
