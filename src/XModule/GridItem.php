@@ -2,22 +2,18 @@
 
 namespace XModule;
 
-use \XModule\Base\Element;
-use \XModule\Constants\ElementType;
 use \XModule\GridItemImage;
 use \XModule\Shared\Functions;
 use \XModule\Traits\WithLabel;
 use \XModule\Traits\WithLink;
 
-class GridItem extends Element
+class GridItem
 {
   use WithLabel, WithLink;
   private $image;
 
   public function __construct($label, $link, $image)
   {
-    parent::__construct(ElementType::GRID_ITEM);
-
     self::initLabel(['label' => $label]);
     self::initLink(['link' => $link]);
 
@@ -31,7 +27,7 @@ class GridItem extends Element
 
   public function render()
   {
-    $render = parent::render();
+    $render = [];
 
     self::renderLabel($render);
     self::renderLink($render);

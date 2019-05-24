@@ -2,7 +2,6 @@
 
 namespace XModule;
 
-use \XModule\Base\Element;
 use \XModule\Constants\Margins;
 use \XModule\Traits\WithValue;
 
@@ -10,7 +9,7 @@ const DEFAULT_CONTAINER_MARGINS_OPTIONS = [
   'value' => Margins::NONE,
 ];
 
-class ContainerMargins extends Element
+class ContainerMargins
 {
   use WithValue;
 
@@ -21,7 +20,7 @@ class ContainerMargins extends Element
 
   public function setValue(string $value)
   {
-    $this->value = Margins::validate($value, $this->getElementType());
+    $this->value = Margins::validate($value, 'containerMargins');
   }
 
   public function render()

@@ -2,9 +2,7 @@
 
 namespace XModule;
 
-use \XModule\Base\Element;
 use \XModule\CarouselItemImage;
-use \XModule\Constants\ElementType;
 use \XModule\Shared\Functions;
 use \XModule\Traits\WithLink;
 use \XModule\Traits\WithSubtitle;
@@ -17,15 +15,13 @@ const DEFAULT_CAROUSEL_ITEM_OPTIONS = [
   'image' => null,
 ];
 
-class CarouselItem extends Element
+class CarouselItem
 {
   use WithSubtitle, WithTitle, WithLink;
   private $image;
 
   public function __construct(array $options = DEFAULT_CAROUSEL_ITEM_OPTIONS)
   {
-    parent::__construct(ElementType::CAROUSEL_ITEM);
-
     self::initLink($options);
     self::initTitle($options);
     self::initSubtitle($options);
@@ -42,7 +38,7 @@ class CarouselItem extends Element
 
   public function render()
   {
-    $render = parent::render();
+    $render = [];
 
     self::renderLink($render);
     self::renderTitle($render);
