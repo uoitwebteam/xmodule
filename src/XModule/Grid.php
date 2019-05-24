@@ -7,6 +7,7 @@ use \XModule\Constants\ElementType;
 use \XModule\Constants\Position;
 use \XModule\Constants\Spacing;
 use \XModule\GridItem;
+use \XModule\Shared\Functions;
 use \XModule\Traits\WithId;
 
 const DEFAULT_GRID_OPTIONS = [

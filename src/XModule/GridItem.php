@@ -5,6 +5,7 @@ namespace XModule;
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
 use \XModule\Image;
+use \XModule\Shared\Functions;
 use \XModule\Traits\WithLabel;
 use \XModule\Traits\WithLink;
 
