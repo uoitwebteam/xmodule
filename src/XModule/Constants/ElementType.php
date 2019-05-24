@@ -6,26 +6,26 @@ use \XModule\Constants\Enum;
 
 abstract class ElementType extends Enum
 {
-  const TABS = 'tabs';
-  const LIST = 'list';
+  const AJAX_CONTENT = 'ajaxContent';
+  const BUTTON_CONTAINER = 'buttonContainer';
+  const COLLAPSIBLE = 'collapsible';
+  const CAROUSEL = 'carousel';
   const DETAIL = 'detail';
+  const FORM = 'form';
+  const FORM_BUTTON = 'formButton';
+  const GRID = 'grid';
+  const GRID_ITEM = 'gridItem';
+  const HEADING = 'heading';
+  const HTML = 'html';
+  const IMAGE = 'image';
+  const INPUT = 'input';
+  const MULTICOLUMN = 'multicolumn';
+  const LINK_BUTTON = 'linkButton';
+  const LIST = 'list';
+  const TABLE = 'table';
+  const TABS = 'tabs';
   const TOOLBAR = 'toolbar';
   const TOOLBAR_BUTTON = 'toolbarButton';
   const TOOLBAR_LABEL = 'toolbarLabel';
   const TOOLBAR_MENU = 'toolbarMenu';
-  const LINK_BUTTON = 'linkButton';
-  const BUTTON_CONTAINER = 'buttonContainer';
-  const COLLAPSIBLE = 'collapsible';
-  const CONTAINER = 'container';
-  const FORM = 'form';
-  const FORM_BUTTON = 'formButton';
-  const HEADING = 'heading';
-  const TABLE = 'table';
-  const IMAGE = 'image';
-  const INPUT = 'input';
-  const HTML = 'html';
-  const GRID = 'grid';
-  const GRID_ITEM = 'gridItem';
-  const AJAX_CONTENT = 'ajaxContent';
-  const MULTICOLUMN = 'multicolumn';
 }

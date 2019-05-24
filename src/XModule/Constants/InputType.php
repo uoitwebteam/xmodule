@@ -4,7 +4,8 @@ namespace XModule\Constants;
 
 use \XModule\Constants\Enum;
 
-abstract class InputType extends Enum {
+abstract class InputType extends Enum
+{
   const CHECKBOX = 'checkbox';
   const EMAIL = 'email';
   const HIDDEN = 'hidden';
