@@ -58,9 +58,8 @@ const createEnum = id => {
   renderAndWrite(classname, TYPE_ENUM, CONSTANTS_PATH, null, false);
 }
 
-const createTrait = id => {
-  const name = id.toLowerCase();
-  const classname = uppercaseFirst(id);
+const createTrait = name => {
+  const classname = uppercaseFirst(name);
   renderAndWrite(`With${classname}`, TYPE_TRAIT, TRAITS_PATH, {
     name,
     classname
