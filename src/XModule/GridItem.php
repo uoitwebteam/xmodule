@@ -9,27 +9,19 @@ use \XModule\Shared\Functions;
 use \XModule\Traits\WithLabel;
 use \XModule\Traits\WithLink;
 
-const DEFAULT_GRID_ITEM_OPTIONS = [
-  'image' => null,
-  'label' => null,
-  'link' => null,
-];
-
 class GridItem extends Element
 {
   use WithLabel, WithLink;
   private $image;
 
-  public function __construct(array $options = DEFAULT_GRID_ITEM_OPTIONS)
+  public function __construct($label, $link, $image)
   {
     parent::__construct(ElementType::GRID_ITEM);
 
-    self::initLabel($options);
-    self::initLink($options);
+    self::initLabel(['label' => $label]);
+    self::initLink([ 'link' => $link]);
 
-    if (isset($options['image'])) {
-      $this->setImage($options['image']);
-    }
+    $this->setImage($image);
   }
 
   public function setImage(Image $image)
