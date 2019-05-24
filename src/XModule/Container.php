@@ -5,6 +5,7 @@ namespace XModule;
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\Margins;
+use \XModule\ContainerMargins;
 use \XModule\Traits\WithAjaxContent;
 use \XModule\Traits\WithId;
 
@@ -12,9 +13,7 @@ const DEFAULT_CONTAINER_OPTIONS = [
   'id' => null,
   'content' => [],
   'hidden' => false,
-  'margins' => [
-    'value' => Margins::NONE,
-  ],
+  'margins' => null,
 ];
 
 class Container extends Element
@@ -43,12 +42,9 @@ class Container extends Element
     $this->hidden = $hidden;
   }
 
-  public function setMargins(string $margins)
+  public function setMargins(ContainerMargins $margins)
   {
-    if (!$this->margins || !isset($this->margins['value'])) {
-      $this->margins = ['value' => null];
-    }
-    $this->margins['value'] = Margins::validate($margins, $this->getElementType(), 'value');
+    $this->margins = $margins;
   }
 
   public function render()
