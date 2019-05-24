@@ -7,6 +7,7 @@ use \XModule\Constants\ElementType;
 use \XModule\Constants\Margins;
 use \XModule\ContainerMargins;
 use \XModule\Traits\WithAjaxContent;
+use \XModule\Traits\WithHidden;
 use \XModule\Traits\WithId;
 
 const DEFAULT_CONTAINER_OPTIONS = [
@@ -18,8 +19,7 @@ const DEFAULT_CONTAINER_OPTIONS = [
 
 class Container extends Element
 {
-  use WithId, WithAjaxContent;
-  private $hidden;
+  use WithId, WithAjaxContent, WithHidden;
   private $margins;
 
   public function __construct(array $options = DEFAULT_CONTAINER_OPTIONS)
@@ -28,18 +28,11 @@ class Container extends Element
 
     self::initId($options);
     self::initContent($options);
+    self::initHidden($options);
 
-    if (isset($options['hidden'])) {
-      $this->setHidden($options['hidden']);
-    }
     if (isset($options['margins'])) {
       $this->setMargins($options['margins']);
     }
-  }
-
-  public function setHidden(bool $hidden)
-  {
-    $this->hidden = $hidden;
   }
 
   public function setMargins(ContainerMargins $margins)
@@ -53,10 +46,8 @@ class Container extends Element
 
     self::renderId($render);
     self::renderContent($render);
+    self::renderHidden($render);
 
-    if (isset($this->hidden)) {
-      $render['hidden'] = $this->hidden;
-    }
     if (isset($this->margins)) {
       $render['margins'] = $this->margins;
     }
