@@ -17,9 +17,9 @@ class Checkbox extends FormControl
 {
   use WithDescription, WithProgressiveDisclosureItems;
 
-  public function __construct(array $options = DEFAULT_CHECKBOX_OPTIONS)
+  public function __construct(string $label, string $name, array $options = DEFAULT_CHECKBOX_OPTIONS)
   {
-    parent::__construct(InputType::CHECKBOX);
+    parent::__construct(InputType::CHECKBOX, $label, $name);
 
     self::initDescription($options);
     self::initProgressiveDisclosureItems($options);
