@@ -4,7 +4,7 @@ namespace XModule;
 
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
-use \XModule\Image;
+use \XModule\GridItemImage;
 use \XModule\Shared\Functions;
 use \XModule\Traits\WithLabel;
 use \XModule\Traits\WithLink;
@@ -19,12 +19,12 @@ class GridItem extends Element
     parent::__construct(ElementType::GRID_ITEM);
 
     self::initLabel(['label' => $label]);
-    self::initLink([ 'link' => $link]);
+    self::initLink(['link' => $link]);
 
     $this->setImage($image);
   }
 
-  public function setImage(Image $image)
+  public function setImage(GridItemImage $image)
   {
     $this->image = $image;
   }
