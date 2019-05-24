@@ -1,36 +1,28 @@
 <?php
-
 namespace XModule\Base;
+
+use \XModule\Traits\WithLabel;
+use \XModule\Traits\WithName;
 
 class FormControl extends FormElement
 {
-  private $name;
+  use WithLabel, WithName;
 
   public function __construct(string $inputType, string $label, string $name)
   {
-    parent::__construct($inputType, $label);
+    parent::__construct($inputType);
 
-    $this->setLabel($label);
-    $this->setName($name);
-  }
-
-  public function setLabel(string $label)
-  {
-    $this->label = $label;
-  }
-
-  public function setName(string $name)
-  {
-    $this->name = $name;
+    self::initLabel(['label' => $label]);
+    self::initName(['name' => $name]);
   }
 
   public function render()
   {
     $render = parent::render();
-    
-    $render['label'] = $this->label;
-    $render['name'] = $this->name;
-    
+
+    self::renderLabel($render);
+    self::renderName($render);
+
     return $render;
   }
 }
