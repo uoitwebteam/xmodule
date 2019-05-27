@@ -49,7 +49,7 @@ class Carousel extends Element
 
     self::renderId($render);
 
-    if (isset($this->grouped)) {
+    if (isset($this->items)) {
       $render['items'] = Functions::safeRender($this->items);
     }
 
