@@ -177,7 +177,27 @@ class GoogleMap extends Element
 
   public function setStaticPlacemarks(array $staticPlacemarks)
   {
-    $this->staticPlacemarks = $staticPlacemarks;
+    foreach ($staticPlacemarks as $staticPlacemark) {
+      $this->addStaticPlacemark($staticPlacemark);
+    }
+  }
+
+  public function addStaticPlacemark($staticPlacemark)
+  {
+    if (!$this->staticPlacemarks) {
+      $this->staticPlacemarks = [];
+    }
+    if (
+      Functions::isOneOf($staticPlacemark, [
+        \XModule\MapPoint::class,
+        \XModule\MapPolygon::class,
+        \XModule\MapPolyline::class,
+      ])
+    ) {
+      array_push($this->staticPlacemarks, $staticPlacemark);
+    } else {
+      Functions::throwInvalidType($staticPlacemark, $this->getElementType(), 'static placemark');
+    }
   }
 
   public function setDynamicPlacemarks(AjaxContent $dynamicPlacemarks)
