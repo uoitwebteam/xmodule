@@ -7,6 +7,7 @@ use \XModule\Constants\AspectRatio;
 use \XModule\Constants\BaseLayer;
 use \XModule\Constants\ElementType;
 use \XModule\Shared\AjaxContent;
+use \XModule\Shared\Functions;
 use \XModule\Traits\WithId;
 
 const DEFAULT_GOOGLE_MAP_OPTIONS = [
@@ -251,10 +252,10 @@ class GoogleMap extends Element
       $render['baseLayers'] = $this->baseLayers;
     }
     if (isset($this->staticPlacemarks)) {
-      $render['staticPlacemarks'] = $this->staticPlacemarks;
+      $render['staticPlacemarks'] = Functions::safeRender($this->staticPlacemarks);
     }
     if (isset($this->dynamicPlacemarks)) {
-      $render['dynamicPlacemarks'] = $this->dynamicPlacemarks;
+      $render['dynamicPlacemarks'] = Functions::safeRender($this->dynamicPlacemarks);
     }
 
     return $render;
