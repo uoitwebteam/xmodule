@@ -24,7 +24,7 @@ class Carousel extends Element
     self::initId($options);
 
     if (isset($options['items'])) {
-      $this->setItems($items);
+      $this->setItems($options['items']);
     }
   }
 
