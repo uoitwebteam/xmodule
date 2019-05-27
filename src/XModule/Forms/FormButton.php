@@ -3,16 +3,16 @@
 namespace XModule\Forms;
 
 use \XModule\Base\Element;
-use \XModule\Constants\AccessoryIcon;
 use \XModule\Constants\AccessoryIconPosition;
 use \XModule\Constants\ButtonType;
 use \XModule\Constants\ElementType;
+use \XModule\Constants\Icon;
 use \XModule\Traits\WithAccessoryIconPosition;
 
 const DEFAULT_FORM_BUTTON_OPTIONS = [
   'name' => null,
   'buttonType' => ButtonType::SUBMIT,
-  'accessoryIcon' => AccessoryIcon::NONE,
+  'accessoryIcon' => Icon::NONE,
   'accessoryIconPosition' => AccessoryIconPosition::LEFT,
   'actionType' => null,
 ];
@@ -65,7 +65,7 @@ class FormButton extends Element
 
   public function setAccessoryIcon(string $accessoryIcon)
   {
-    $this->accessoryIcon = AccessoryIcon::validate($accessoryIcon, $this->getElementType());
+    $this->accessoryIcon = Icon::validate($accessoryIcon, $this->getElementType());
   }
 
   public function setActionType(string $actionType)
