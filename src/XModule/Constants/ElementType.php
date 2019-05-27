@@ -21,6 +21,7 @@ abstract class ElementType extends Enum
   const INPUT = 'input';
   const LINK_BUTTON = 'linkButton';
   const LIST = 'list';
+  const LOADING_INDICATOR = 'loadingIndicator';
   const MULTICOLUMN = 'multicolumn';
   const PORTLET = 'portlet';
   const TABLE = 'table';
