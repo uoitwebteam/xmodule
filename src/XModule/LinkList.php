@@ -26,7 +26,7 @@ class LinkList extends Element
 
   public function __construct($items, array $options = DEFAULT_LIST_OPTIONS)
   {
-    parent::__construct(ElementType::list);
+    parent::__construct(ElementType::LIST);
 
     $this->setItems($items);
 
