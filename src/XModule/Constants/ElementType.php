@@ -10,6 +10,7 @@ abstract class ElementType extends Enum
   const BUTTON_CONTAINER = 'buttonContainer';
   const CAROUSEL = 'carousel';
   const COLLAPSIBLE = 'collapsible';
+  const CONTAINER = 'container';
   const DETAIL = 'detail';
   const FORM = 'form';
   const FORM_BUTTON = 'formButton';
