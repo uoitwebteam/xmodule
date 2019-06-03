@@ -5,6 +5,7 @@ namespace XModule;
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\TabType;
+use \XModule\Shared\Functions;
 use \XModule\Tab;
 use \XModule\Traits\WithId;
 
@@ -27,6 +28,11 @@ class Tabs extends Element
 
     self::initId($options);
 
+    $this->setTabs($tabs);
+
+    if (isset($options['tabType'])) {
+      $this->setTabType($options['tabType']);
+    }
     if (isset($options['forceAjaxOnLoad'])) {
       $this->setForceAjaxOnLoad($options['forceAjaxOnLoad']);
     }
