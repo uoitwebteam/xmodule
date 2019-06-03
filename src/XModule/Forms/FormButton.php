@@ -38,7 +38,7 @@ class FormButton extends Element
       $this->setName($name);
     }
     if (isset($options['buttonType'])) {
-      $this->setButtonType($buttonType);
+      $this->setButtonType($options['buttonType']);
     }
     if (isset($options['accessoryIcon'])) {
       $this->setAccessoryIcon($options['accessoryIcon']);
