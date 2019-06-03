@@ -4,6 +4,7 @@ namespace XModule\Forms;
 
 use \XModule\Base\Element;
 use \XModule\Constants\AccessoryIconPosition;
+use \XModule\Constants\ActionType;
 use \XModule\Constants\ButtonType;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\Icon;
