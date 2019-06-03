@@ -76,7 +76,7 @@ class Tabs extends Element
       $render['tabType'] = $this->tabType;
     }
     if (isset($this->forceAjaxOnLoad)) {
-      $render['forceAjaxOnLoad'] = $this->height;
+      $render['forceAjaxOnLoad'] = $this->forceAjaxOnLoad;
     }
 
     return $render;
