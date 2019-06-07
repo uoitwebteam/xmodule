@@ -3,6 +3,9 @@
 namespace XModule\Base;
 
 use \XModule\Constants\ElementType;
+use \XModule\Constants\LayoutType;
+use \XModule\Constants\ModuleType;
+use \XModule\Shared\Functions;
 
 class Element
 {
@@ -13,7 +16,7 @@ class Element
    */
   private $elementType;
 
-  public function __construct(string $type)
+  public function __construct($type)
   {
     $this->setElementType($type);
   }
@@ -24,9 +27,19 @@ class Element
    * @param string $type
    * @return void
    */
-  protected function setElementType(string $type)
+  protected function setElementType($type)
   {
-    $this->elementType = ElementType::validate($type, $this->getElementType());
+    if (is_array($type)) {
+      $this->elementType = implode(':', [
+        ModuleType::validate($type, 'element'),
+        LayoutType::validate($type, 'element'),
+        ElementType::validate($type, 'element'),
+      ]);
+    } else if (is_string($type)) {
+      $this->elementType = ElementType::validate($type, $this->getElementType());
+    } else {
+      Functions::throwInvalidType($type, 'element', 'type');
+    }
   }
 
   /**
