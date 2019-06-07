@@ -39,11 +39,6 @@ class Collapsible extends Element
     }
   }
 
-  public function setTitle(string $title)
-  {
-    $this->title = $title;
-  }
-
   public function setCollapsed(bool $collapsed)
   {
     $this->collapsed = $collapsed;
