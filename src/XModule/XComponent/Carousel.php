@@ -6,6 +6,7 @@ use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\LayoutType;
 use \XModule\Constants\ModuleType;
+use \XModule\Shared\Functions;
 use \XModule\XComponent\CarouselItem;
 
 class Carousel extends Element
@@ -37,7 +38,7 @@ class Carousel extends Element
   public function render()
   {
     $render = parent::render();
-    $render['items'] = $this->items;
+    $render['items'] = Functions::safeRender($this->items);
 
     return $render;
   }
