@@ -6,6 +6,7 @@ use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\Margins;
 use \XModule\ContainerMargins;
+use \XModule\Shared\Functions;
 use \XModule\Traits\WithAjaxContent;
 use \XModule\Traits\WithHidden;
 use \XModule\Traits\WithId;
@@ -49,7 +50,7 @@ class Container extends Element
     self::renderHidden($render);
 
     if (isset($this->margins)) {
-      $render['margins'] = $this->margins;
+      $render['margins'] = Functions::safeRender($this->margins);
     }
 
     return $render;
