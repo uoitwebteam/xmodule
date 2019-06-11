@@ -31,9 +31,9 @@ class Element
   {
     if (is_array($type)) {
       $this->elementType = implode(':', [
-        ModuleType::validate($type, 'element'),
-        LayoutType::validate($type, 'element'),
-        ElementType::validate($type, 'element'),
+        ModuleType::validate($type[0], 'element'),
+        LayoutType::validate($type[1], 'element'),
+        ElementType::validate($type[2], 'element'),
       ]);
     } else if (is_string($type)) {
       $this->elementType = ElementType::validate($type, $this->getElementType());
