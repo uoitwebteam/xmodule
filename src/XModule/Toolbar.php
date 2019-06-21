@@ -63,6 +63,21 @@ class Toolbar extends Element
     }
   }
 
+  public function addLeftItem($item)
+  {
+    $this->addItem(Position::LEFT, $item);
+  }
+
+  public function addMiddleItem($item)
+  {
+    $this->addItem(Position::MIDDLE, $item);
+  }
+
+  public function addRightItem($item)
+  {
+    $this->addItem(Position::RIGHT, $item);
+  }
+
   public function addItem(string $position, $item)
   {
     if (Functions::isOneOf($item, [ToolbarButton::class, ToolbarLabel::class, ToolbarMenu::class])) {
