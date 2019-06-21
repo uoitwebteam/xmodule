@@ -27,7 +27,7 @@ class CarouselItem
     self::initSubtitle($options);
 
     if (isset($options['image'])) {
-      $this->setImage($image);
+      $this->setImage($options['image']);
     }
   }
 
