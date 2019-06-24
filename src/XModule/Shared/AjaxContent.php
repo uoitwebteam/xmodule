@@ -2,8 +2,8 @@
 
 namespace XModule\Shared;
 
-use \XModule\Base\Element;
-use \XModule\Constants\ElementType;
+use \XModule\Traits\WithAjaxRelativePath;
+use \XModule\Traits\WithAjaxUpdateInterval;
 
 const DEFAULT_AJAX_CONTENT_OPTIONS = [
   'ajaxUpdateInterval' => null,
@@ -12,42 +12,33 @@ const DEFAULT_AJAX_CONTENT_OPTIONS = [
 
 class AjaxContent extends Element
 {
-  private $path;
-  private $ajaxUpdateInterval;
+  use WithAjaxRelativePath, WithAjaxUpdateInterval;
   private $ajaxOnFirstLoad;
 
-  public function __construct($path, $options = DEFAULT_AJAX_CONTENT_OPTIONS)
+  public function __construct($ajaxRelativePath, $options = DEFAULT_AJAX_CONTENT_OPTIONS)
   {
     parent::__construct(ElementType::AJAX_CONTENT);
 
-    $this->path = $path;
+    self::initAjaxRelativePath(['ajaxRelativePath' => $ajaxRelativePath]);
+    self::initAjaxUpdateInterval($options);
 
-    if (isset($options['ajaxUpdateInterval'])) {
-      $this->setAjaxUpdateInterval($options['ajaxUpdateInterval']);
-    }
     if (isset($options['ajaxOnFirstLoad'])) {
       $this->setAjaxOnFirstLoad($options['ajaxOnFirstLoad']);
     }
   }
 
-  public function setAjaxUpdateInterval(int $interval)
+  public function setAjaxOnFirstLoad(bool $ajaxOnFirstLoad)
   {
-    $this->ajaxUpdateInterval = $interval;
-  }
-
-  public function setAjaxOnFirstLoad(bool $load)
-  {
-    $this->ajaxOnFirstLoad = $load;
+    $this->ajaxOnFirstLoad = $ajaxOnFirstLoad;
   }
 
   public function render()
   {
     $render = parent::render();
-    $render['ajaxRelativePath'] = $this->path;
 
-    if (isset($this->ajaxUpdateInterval)) {
-      $render['ajaxUpdateInterval'] = $this->ajaxUpdateInterval;
-    }
+    self::renderAjaxRelativePath($render);
+    self::renderAjaxUpdateInterval($render);
+
     if (isset($this->ajaxOnFirstLoad)) {
       $render['ajaxOnFirstLoad'] = $this->ajaxOnFirstLoad;
     }
