@@ -29,6 +29,7 @@ abstract class ElementType extends Enum
   const TABS = 'tabs';
   const TOOLBAR = 'toolbar';
   const TOOLBAR_BUTTON = 'toolbarButton';
+  const TOOLBAR_CONTENT = 'toolbarContentAjax';
   const TOOLBAR_LABEL = 'toolbarLabel';
   const TOOLBAR_MENU = 'toolbarMenu';
 }
