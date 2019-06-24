@@ -27,6 +27,16 @@ class ToolbarContent extends ToolbarBase
   public function __construct(array $options = DEFAULT_TOOLBAR_CONTENT_OPTIONS)
   {
     parent::__construct(ElementType::TOOLBAR_CONTENT, $options);
+    if (isset($options['menuItems'])) {
+      $this->setMenuItems($options['menuItems']);
+    }
+    if (isset($options['menuPosition'])) {
+      $this->setMenuPosition($options['menuPosition']);
+    }
+    if (isset($options['ajaxUpdateInterval'])) {
+      $this->setAjaxUpdateInterval($options['ajaxUpdateInterval']);
+    }
+
   }
 
   public function setMenuItems(array $items)
@@ -46,7 +56,7 @@ class ToolbarContent extends ToolbarBase
 
   public function setMenuPosition(string $position)
   {
-    $this->position = Position::validate($position, $this->getElementType());
+    $this->menuPosition = Position::validate($position, $this->getElementType());
   }
 
   public function render()
