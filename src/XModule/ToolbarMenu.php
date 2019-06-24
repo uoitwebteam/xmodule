@@ -20,7 +20,6 @@ class ToolbarMenu extends Element
 
   public function setItems(array $items)
   {
-    $this->items = [];
     foreach ($items as $item) {
       $this->addItem($item);
     }
@@ -28,6 +27,9 @@ class ToolbarMenu extends Element
 
   public function addItem(ToolbarMenuItem $item)
   {
+    if (!$this->items) {
+      $this->items = [];
+    }
     array_push($this->items, $item);
   }
 
