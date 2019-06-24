@@ -1,6 +1,6 @@
 <?php
 
-namespace XModule;
+namespace XModule\Base;
 
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
