@@ -4,6 +4,14 @@ namespace XModule;
 
 use \XModule\Base\ToolbarBase;
 use \XModule\Constants\ElementType;
+use \XModule\Constants\Position;
+
+const DEFAULT_TOOLBAR_OPTIONS = [
+  'id' => null,
+  Position::LEFT => [],
+  Position::RIGHT => [],
+  Position::MIDDLE => [],
+];
 
 /**
  * Inherits from `\XModule\Base\ToolbarBase` – no methods
