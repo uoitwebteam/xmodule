@@ -2,6 +2,8 @@
 
 namespace XModule\Shared;
 
+use \XModule\Base\Element;
+use \XModule\Constants\ElementType;
 use \XModule\Traits\WithAjaxRelativePath;
 use \XModule\Traits\WithAjaxUpdateInterval;
 
