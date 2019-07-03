@@ -32,7 +32,6 @@ class XModule
 
   public function setRegionContent(array $regionContents)
   {
-    $this->regionContent = [];
     foreach ($regionContents as $regionContent) {
       $this->addRegionContent($regionContent);
     }
@@ -40,6 +39,9 @@ class XModule
 
   public function addRegionContent($regionContent)
   {
+    if (!isset($this->regionContent)) {
+      $this->regionContent = [];
+    }
     if (Functions::hasNamespace('XModule', $regionContent)) {
       array_push($this->regionContent, $regionContent);
     } else {
