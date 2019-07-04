@@ -1,5 +1,4 @@
 <?php
-
 namespace XModule\Shared;
 
 use \XModule\Constants\EventAction;
@@ -23,7 +22,7 @@ class Event
     $this->setTargetId($targetId);
     $this->setAction($action);
 
-    if (isset($useRelativePathToUpdate)) {
+    if (isset($options['useRelativePathToUpdate'])) {
       $this->setUseRelativePathToUpdate($options['useRelativePathToUpdate']);
     }
   }
