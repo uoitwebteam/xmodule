@@ -8,4 +8,5 @@ abstract class EventAction extends Enum
 {
   const SHOW = 'show';
   const HIDE = 'hide';
+  const AJAX_UPDATE = 'ajaxUpdate';
 }

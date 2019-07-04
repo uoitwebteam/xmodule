@@ -5,6 +5,7 @@ namespace XModule\Forms;
 use \XModule\Base\FormControl;
 use \XModule\Constants\InputType;
 use \XModule\Traits\WithDescription;
+use \XModule\Traits\WithEvents;
 use \XModule\Traits\WithProgressiveDisclosureItems;
 use \XModule\Traits\WithRequired;
 use \XModule\Traits\WithValue;
@@ -20,7 +21,7 @@ const DEFAULT_SELECT_OPTIONS = [
 
 class Select extends FormControl
 {
-  use WithDescription, WithProgressiveDisclosureItems, WithRequired, WithValue;
+  use WithDescription, WithProgressiveDisclosureItems, WithEvents, WithRequired, WithValue;
   private $optionLabels;
   private $optionValues;
 
@@ -29,6 +30,7 @@ class Select extends FormControl
     parent::__construct(InputType::SELECT, $label, $name);
 
     self::initDescription($options);
+    self::initEvents($options);
     self::initProgressiveDisclosureItems($options);
     self::initRequired($options);
     self::initValue($options);
@@ -76,6 +78,7 @@ class Select extends FormControl
     $render = parent::render();
 
     self::renderDescription($render);
+    self::renderEvents($render);
     self::renderProgressiveDisclosureItems($render);
     self::renderRequired($render);
     self::renderValue($render);
