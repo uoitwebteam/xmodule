@@ -2,6 +2,7 @@
 namespace XModule\Traits;
 
 use \XModule\Shared\Event;
+use \XModule\Shared\Functions;
 
 trait WithEvents
 {
@@ -32,7 +33,7 @@ trait WithEvents
   public function renderEvents(&$render)
   {
     if (isset($this->events)) {
-      $render['events'] = $this->events;
+      $render['events'] = Functions::safeRender($this->events);
     }
   }
 }
