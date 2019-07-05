@@ -17,6 +17,7 @@ abstract class ElementType extends Enum
   const FORM_BUTTON = 'formButton';
   const GRID = 'grid';
   const HEADING = 'heading';
+  const HERO = 'hero';
   const HTML = 'html';
   const IMAGE = 'image';
   const INPUT = 'input';

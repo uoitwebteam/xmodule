@@ -1,6 +1,8 @@
 <?php
 namespace XModule\Traits;
 
+use \XModule\Shared\Background;
+
 trait WithBackground
 {
   private $background;
@@ -12,13 +14,9 @@ trait WithBackground
     }
   }
 
-  public function setBackground(array $background)
+  public function setBackground(Background $background)
   {
-    if (isset($background['url'])) {
-      $this->background = $background;
-    } else {
-      Functions::throwInvalidType($background, $this->getElementType(), 'background');
-    }
+    $this->background = $background;
   }
 
   public function renderBackground(&$render)

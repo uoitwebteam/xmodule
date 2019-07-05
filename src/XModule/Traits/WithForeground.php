@@ -1,6 +1,8 @@
 <?php
 namespace XModule\Traits;
 
+use \XModule\Shared\Foreground;
+
 trait WithForeground
 {
   private $foreground;
@@ -12,13 +14,9 @@ trait WithForeground
     }
   }
 
-  public function setForeground(array $foreground)
+  public function setForeground(Foreground $foreground)
   {
-    if (isset($foreground['url'])) {
-      $this->foreground = $foreground;
-    } else {
-      Functions::throwInvalidType($foreground, $this->getElementType(), 'foreground');
-    }
+    $this->foreground = $foreground;
   }
 
   public function renderForeground(&$render)
