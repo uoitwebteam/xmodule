@@ -7,6 +7,7 @@ use \XModule\Constants\AccessoryIconPosition;
 use \XModule\Constants\ActionType;
 use \XModule\Constants\ElementType;
 use \XModule\Traits\WithAccessoryIconPosition;
+use \XModule\Traits\WithEvents;
 use \XModule\Traits\WithId;
 use \XModule\Traits\WithLink;
 
@@ -20,7 +21,7 @@ const DEFAULT_LINK_BUTTON_OPTIONS = [
 
 class LinkButton extends Element
 {
-  use WithAccessoryIconPosition, WithId, WithLink;
+  use WithAccessoryIconPosition, WithEvents, WithId, WithLink;
   private $title;
   private $disabled;
   private $actionType;
@@ -32,6 +33,7 @@ class LinkButton extends Element
     $this->setTitle($title);
 
     self::initId($options);
+    self::initEvents($options);
     self::initLink($options);
     self::initAccessoryIconPosition($options);
 
@@ -64,6 +66,7 @@ class LinkButton extends Element
     $render['title'] = $this->title;
 
     self::renderId($render);
+    self::renderEvents($render);
     self::renderLink($render);
     self::renderAccessoryIconPosition($render);
 
