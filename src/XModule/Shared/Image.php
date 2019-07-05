@@ -1,21 +1,23 @@
 <?php
 
-namespace XModule;
+namespace XModule\Shared;
 
 use \XModule\Traits\WithUrl;
 
-const DEFAULT_FOREGROUND_OPTIONS = [
+const DEFAULT_IMAGE_OPTIONS = [
   'alt' => null,
 ];
 
-class Foreground
+class Image
 {
   use WithUrl;
   private $alt;
 
-  public function __construct(string $url, array $options = DEFAULT_FOREGROUND_OPTIONS)
+  public function __construct(string $url, array $options = DEFAULT_IMAGE_OPTIONS)
   {
-    self::initUrl(['url' => $url]);
+    parent::__construct(ElementType::IMAGE);
+
+    self::initUrl($options);
 
     if (isset($options['alt'])) {
       $this->setAlt($options['alt']);
@@ -30,6 +32,7 @@ class Foreground
   public function render()
   {
     $render = [];
+
     self::renderUrl($render);
 
     if (isset($this->alt)) {

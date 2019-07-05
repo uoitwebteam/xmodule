@@ -1,7 +1,8 @@
 <?php
 namespace XModule\Traits;
 
-use \XModule\Shared\Background;
+use \XModule\Shared\Functions;
+use \XModule\Shared\Image;
 
 trait WithBackground
 {
@@ -14,7 +15,7 @@ trait WithBackground
     }
   }
 
-  public function setBackground(Background $background)
+  public function setBackground(Image $background)
   {
     $this->background = $background;
   }
@@ -22,7 +23,7 @@ trait WithBackground
   public function renderBackground(&$render)
   {
     if (isset($this->background)) {
-      $render['background'] = $this->background;
+      $render['background'] = Functions::safeRender($this->background);
     }
   }
 }

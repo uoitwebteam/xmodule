@@ -2,6 +2,7 @@
 
 namespace XModule;
 
+use \XModule\Base\Element;
 use \XModule\Traits\WithId;
 
 const DEFAULT_IMAGE_OPTIONS = [
@@ -11,7 +12,7 @@ const DEFAULT_IMAGE_OPTIONS = [
   'enableZoomControls' => false,
 ];
 
-class Image
+class Image extends Element
 {
   use WithId;
   private $url;
