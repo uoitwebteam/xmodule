@@ -7,6 +7,7 @@ use \XModule\Base\FormElement;
 use \XModule\Constants\ElementType;
 use \XModule\Constants\PostType;
 use \XModule\Shared\Functions;
+use \XModule\Traits\WithEvents;
 use \XModule\Traits\WithHeading;
 use \XModule\Traits\WithId;
 
@@ -21,7 +22,7 @@ const DEFAULT_FORM_OPTIONS = [
 class Form extends Element
 {
 
-  use WithId, WithHeading;
+  use WithId, WithHeading, WithEvents;
   private $items;
   private $postRelativePath;
   private $postType;
@@ -36,6 +37,7 @@ class Form extends Element
     $this->setPostRelativePath($postRelativePath);
 
     self::initId($options);
+    self::initEvents($options);
     self::initHeading($options);
 
     if (isset($options['postType'])) {
@@ -105,6 +107,7 @@ class Form extends Element
     $render['postRelativePath'] = $this->postRelativePath;
 
     self::renderId($render);
+    self::renderEvents($render);
     self::renderHeading($render);
 
     if (isset($this->postType)) {
