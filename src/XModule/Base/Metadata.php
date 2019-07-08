@@ -2,6 +2,7 @@
 namespace XModule\Base;
 
 use \XModule\Shared\Banner;
+use \XModule\Shared\Functions;
 
 const DEFAULT_METADATA_OPTIONS = [
   'banners' => null,
