@@ -2,6 +2,7 @@
 
 namespace XModule\Base;
 
+use \XModule\Base\Metadata;
 use \XModule\Shared\Functions;
 use \XModule\Traits\WithContent;
 
@@ -19,9 +20,14 @@ class XModule
   private $metadata;
   private $regionContent;
 
-  public function __construct(int $version = self::XMODULE_VERSION, $options = DEFAULT_XMODULE_OPTIONS)
+  public function __construct($metadata = null, $options = DEFAULT_XMODULE_OPTIONS)
   {
-    $this->setMetadata(['version' => $version]);
+    if (is_numeric($metadata)) {
+      $metadata = new Metadata(1);
+    } else if (!$metadata) {
+      $metadata = new Metadata();
+    }
+    $this->setMetadata($metadata);
 
     self::initContent($options);
 
@@ -49,19 +55,9 @@ class XModule
     }
   }
 
-  public function setMetadata($metadata)
+  public function setMetadata(Metadata $metadata)
   {
-    foreach ($metadata as $key => $value) {
-      $this->addMetadata($key, $value);
-    }
-  }
-
-  public function addMetadata(string $key, $value)
-  {
-    if (!$this->metadata) {
-      $this->metadata = [];
-    }
-    $this->metadata[$key] = $value;
+    $this->metadata = $metadata;
   }
 
   public function render()
