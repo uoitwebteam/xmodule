@@ -4,15 +4,14 @@ namespace XModule;
 
 use \XModule\Base\Element;
 use \XModule\Constants\ElementType;
-use \XModule\Constants\WithDescription;
-use \XModule\Constants\WithLink;
-use \XModule\Constants\WithTitle;
 use \XModule\Maps\Icon;
 use \XModule\Maps\Point;
 use \XModule\Shared\Functions;
+use \XModule\Traits\WithDescription;
+use \XModule\Traits\WithLink;
+use \XModule\Traits\WithTitle;
 
 const DEFAULT_MAP_POINT_OPTIONS = [
-  'point' => null,
   'title' => null,
   'description' => null,
   'link' => null,

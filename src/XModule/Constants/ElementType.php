@@ -16,6 +16,7 @@ abstract class ElementType extends Enum
   const DETAIL = 'detail';
   const FORM = 'form';
   const FORM_BUTTON = 'formButton';
+  const GOOGLE_MAP = 'googleMap';
   const GRID = 'grid';
   const HEADING = 'heading';
   const HERO = 'hero';
@@ -25,6 +26,7 @@ abstract class ElementType extends Enum
   const LINK_BUTTON = 'linkButton';
   const LIST = 'list';
   const LOADING_INDICATOR = 'loadingIndicator';
+  const MAP_POINT = 'mapPoint';
   const MULTICOLUMN = 'multicolumn';
   const PORTLET = 'portlet';
   const TABLE = 'table';
