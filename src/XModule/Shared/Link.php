@@ -23,9 +23,17 @@ class Link
   private $targetNewWindow;
   private $backActionTarget;
 
-  public function __construct(string $path, string $type, $options = DEFAULT_LINK_OPTIONS)
+  public function __construct($path, string $type, $options = DEFAULT_LINK_OPTIONS)
   {
-    $this->setPathAndType($path, $type);
+    if ($type === LinkType::RELATIVE_PATH || $link === LinkType::EXTERNAL) {
+      if (is_string($path)) {
+        $this->setPathAndType($path, $type);
+      } else {
+        Functions::throwInvalidType($path, 'link', 'path');
+      }
+    } else {
+      $this->setPathAndType($path, $type);
+    }
 
     if (isset($options['browserType'])) {
       $this->setBrowserType($options['browserType']);
@@ -41,7 +49,7 @@ class Link
     }
   }
 
-  public function setPath(string $path)
+  public function setPath($path)
   {
     $this->path = $path;
   }
@@ -96,7 +104,7 @@ class Link
     $this->setPathAndType($path, LinkType::NATIVE_PLUGIN);
   }
 
-  private function setPathAndType(string $path, string $type)
+  private function setPathAndType($path, string $type)
   {
     $this->setPath($path);
     $this->setType($type);
