@@ -5,12 +5,12 @@ use \XModule\Constants\AccessoryIconPosition;
 
 trait WithAccessoryIconPosition
 {
-  private $accessoryiconposition;
+  private $accessoryIconPosition;
 
   public function initAccessoryIconPosition(array $options)
   {
-    if (isset($options['accessoryiconposition'])) {
-      $this->setAccessoryIconPosition($options['accessoryiconposition']);
+    if (isset($options['accessoryIconPosition'])) {
+      $this->setAccessoryIconPosition($options['accessoryIconPosition']);
     }
   }
 
@@ -21,8 +21,8 @@ trait WithAccessoryIconPosition
 
   public function renderAccessoryIconPosition(&$render)
   {
-    if (isset($this->accessoryiconposition)) {
-      $render['accessoryiconposition'] = $this->accessoryiconposition;
+    if (isset($this->accessoryIconPosition)) {
+      $render['accessoryIconPosition'] = $this->accessoryIconPosition;
     }
   }
 }
