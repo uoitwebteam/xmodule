@@ -29,8 +29,8 @@ class AjaxContent extends Element
     if (isset($options['ajaxOnFirstLoad'])) {
       $this->setAjaxOnFirstLoad($options['ajaxOnFirstLoad']);
     }
-    if (isset($options['setAjaxGeolocationEnabled'])) {
-      $this->setAjaxGeolocationEnabled($options['setAjaxGeolocationEnabled']);
+    if (isset($options['ajaxGeolocationEnabled'])) {
+      $this->setAjaxGeolocationEnabled($options['ajaxGeolocationEnabled']);
     }
     if (isset($options['ajaxGeolocationContinuous'])) {
       $this->setAjaxGeolocationContinuous($options['ajaxGeolocationContinuous']);
