@@ -12,7 +12,7 @@ const DEFAULT_METADATA_OPTIONS = [
 
 class Metadata
 {
-  const XMODULE_VERSION = 1;
+  const XMODULE_VERSION = 2;
   private $version;
   private $banners;
   private $searchOptions;
