@@ -15,7 +15,7 @@ class XModule
 {
   use WithContent;
 
-  const XMODULE_VERSION = 1;
+  const XMODULE_VERSION = 2;
 
   private $metadata;
   private $regionContent;
@@ -23,9 +23,9 @@ class XModule
   public function __construct($metadata = null, $options = DEFAULT_XMODULE_OPTIONS)
   {
     if (is_numeric($metadata)) {
-      $metadata = new Metadata(1);
+      $metadata = new Metadata(2);
     } else if (!$metadata) {
-      $metadata = new Metadata();
+      $metadata = new Metadata(2);
     }
     $this->setMetadata($metadata);
 
